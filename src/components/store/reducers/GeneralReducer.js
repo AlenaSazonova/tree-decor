@@ -96,22 +96,27 @@ export const initialState = {
 
     filter: [{
         shape: [
-            { src: ball, type: 'шар',},
-            { src: bell, type: 'колокольчик', },
-            { src: figurine, type: 'фигурка', },
-            { src: pine, type: 'шишка', },
-            { src: snowflake, type: 'снежинка', },
-            { src: star, type: 'звезда', },
+            { src: ball, type: 'шар'},
+            { src: bell, type: 'колокольчик'},
+            { src: figurine, type: 'фигурка'},
+            { src: pine, type: 'шишка'},
+            { src: snowflake, type: 'снежинка'},
+            { src: star, type: 'звезда'},
         ],
 
         colours: [
-            { src: white, colour: 'белый', },
-            { src: blue, colour: 'синий', },
-            { src: green, colour: 'зеленый', },
-            { src: red, colour: 'красный', },
-            { src: yellow, colour: 'желтый', },
+            { src: white, colour: 'белый'},
+            { src: blue, colour: 'синий'},
+            { src: green, colour: 'зеленый'},
+            { src: red, colour: 'красный'},
+            { src: yellow, colour: 'желтый'},
         ],
-        size: [{}],
+
+        size: [
+            { id: 1, label: 'Большой' },
+            { id: 1, label: 'Средний' },
+            { id: 1, label: 'Маленький' },
+        ],
 
     }],
 

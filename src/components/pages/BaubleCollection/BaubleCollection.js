@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../../Header/Header';
 import BaubleCard from '../../BaubleCard/BaubleCard';
+import Filtration from '../../Filtration/Filtration';
 import { initialState } from '../../store/reducers/GeneralReducer'
 
 import {
@@ -17,6 +18,8 @@ const BaubleCollection = () => {
     return (
         <Container>
             <Header />
+            <Filtration />
+            
             <CardList>
                 {bauble.map((el, ind) => (
                 <BaubleCard
