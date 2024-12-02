@@ -14,7 +14,7 @@ import {
     from './BaubleCard.style';
 
 
-const BaubleCard = ({ name, baubleImg, amount, yearOfPurchase, type, colour, size, favorite }) => {
+const BaubleCard = ({ name, baubleImg, amount, yearOfPurchase, type, color, size, favorite }) => {
     return (
         <CardContainer>
             <CardHeader>
@@ -32,7 +32,7 @@ const BaubleCard = ({ name, baubleImg, amount, yearOfPurchase, type, colour, siz
                     <DetailItem>{amount}</DetailItem>
                     <DetailItem>{yearOfPurchase}</DetailItem>
                     <DetailItem>{type}</DetailItem>
-                    <DetailItem>{colour}</DetailItem>
+                    <DetailItem>{color}</DetailItem>
                     <DetailItem>{size}</DetailItem>
                     <DetailItem>{favorite}</DetailItem>
                 </CardDetails>

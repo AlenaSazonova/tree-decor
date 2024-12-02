@@ -4,7 +4,7 @@ import {
     Container,
     SectionTitle,
     ShapeFilterContainer,
-    ColourFilterContainer,
+    ColorFilterContainer,
     SizeFilterContainer,
     AmountFilterContainer,
     SortOptionsContainer,
@@ -12,16 +12,15 @@ import {
     from './Filtration.style';
 
 
-const Filtration = () => {
+const Filtration = ({ onShapeFilter, onColorFilter, onSizeFilter }) => {
     const shapeFilter = initialState.filter[0].shape;
-    console.log(shapeFilter);
+    //console.log(shapeFilter);
 
-    const colourFilter = initialState.filter[0].colours;
-    console.log(colourFilter);
+    const colorFilter = initialState.filter[0].colors; 
+    //console.log(colourFilter);
 
     const sizeFilter = initialState.filter[0].size;
     console.log(sizeFilter);
-
 
 
     return (
@@ -33,24 +32,28 @@ const Filtration = () => {
                             <p>Форма:</p>
                             {shapeFilter.map((el, ind) => (
                                 <button key={ind}>
-                                    <img src={el.src} alt="shape" />
+                                    <img src={el.src} onClick={() => onShapeFilter(el.type)} alt="shape" />
                                 </button>
                             ))}
                         </ShapeFilterContainer>
-                        <ColourFilterContainer>
+                        
+                        <ColorFilterContainer>
                             <p>Цвет:</p>
-                            {colourFilter.map((el, ind) => (
+                            {colorFilter.map((el, ind) => (
                                 <button key={ind}>
-                                    <img src={el.src} alt="colour" />
+                                    <img src={el.src} onClick={() => onColorFilter(el.color)} alt="color" />
                                 </button>
                             ))}
-                        </ColourFilterContainer>
+                        </ColorFilterContainer>
                         <SizeFilterContainer>
                             <p>Размер:</p>
                             {sizeFilter.map((el, ind) => (
                                 <label key={ind}>
-                                    <input type='checkbox' />
-                                        {el.label}
+                                    <input 
+                                        type='checkbox' 
+                                        onChange={() => onSizeFilter(el.label)} 
+                                    />
+                                    {el.label}
                                 </label>
                             ))}
                         </SizeFilterContainer>

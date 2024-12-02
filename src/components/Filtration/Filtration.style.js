@@ -15,7 +15,7 @@ export const ShapeFilterContainer = styled.div`
     margin-bottom: 30px;
 `;
 
-export const ColourFilterContainer = styled.div`
+export const ColorFilterContainer = styled.div`
     margin-bottom: 30px;
 `;
 

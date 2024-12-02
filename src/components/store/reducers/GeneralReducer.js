@@ -54,16 +54,16 @@ import yellow from '../../icons/colour/yellow.png';
 export const initialState = {
 
     bauble: [
-        { src: bauble1, name: 'Большой шар с рисунком', amount: 'Количество: 2', yearOfPurchase: 'Год покупки: 1960', type: 'Форма: шар', colour: 'Цвет: желтый', size: 'Размер: большой', favorite: 'Любимая: нет' },
-        { src: bauble2, name: 'Зеленый шар с цветами', amount: 'Количество: 5', yearOfPurchase: 'Год покупки: 2000', type: 'Форма: шар', colour: 'Цвет: зеленый', size: 'Размер: большой', favorite: 'Любимая: нет' },
-        { src: bauble3, name: 'Красный матовый шар', amount: 'Количество: 3', yearOfPurchase: 'Год покупки: 1990', type: 'Форма: шар', colour: 'Цвет: красный', size: 'Размер: большой', favorite: 'Любимая: нет' },
-        { src: bauble4, name: 'Сосулька красная', amount: 'Количество: 2', yearOfPurchase: 'Год покупки: 1980', type: 'Форма: фигурка', colour: 'Цвет: красный', size: 'Размер: большой', favorite: 'Любимая: нет' },
-        { src: bauble5, name: 'Красный виноград', amount: 'Количество: 4', yearOfPurchase: 'Год покупки: 1980', type: 'Форма: фигурка', colour: 'Цвет: красный', size: 'Размер: средний', favorite: 'Любимая: да' },
-        { src: bauble6, name: 'Красный шар с рисунком', amount: 'Количество: 6', yearOfPurchase: 'Год покупки: 2010', type: 'Форма: шар', colour: 'Цвет: красный', size: 'Размер: большой', favorite: 'Любимая: нет' },
-        { src: bauble7, name: 'Молочно-белый шар', amount: 'Количество: 12', yearOfPurchase: 'Год покупки: 1960', type: 'Форма: шар', colour: 'Цвет: белый', size: 'Размер: средний', favorite: 'Любимая: да' },
-        { src: bauble8, name: 'Красный шар', amount: 'Количество: 10', yearOfPurchase: 'Год покупки: 2010', type: 'Форма: шар', colour: 'Цвет: красный', size: 'Размер: большой', favorite: 'Любимая: нет' },
-        { src: bauble9, name: 'Колокольчик старинный', amount: 'Количество: 2', yearOfPurchase: 'Год покупки: 1950', type: 'Форма: колокольчик', colour: 'Цвет: белый', size: 'Размер: большой', favorite: 'Любимая: нет' },
-        { src: bauble10, name: 'Белый шар ретро', amount: 'Количество: 7', yearOfPurchase: 'Год покупки: 1960', type: 'Форма: шар', colour: 'Цвет: белый', size: 'Размер: большой', favorite: 'Любимая: нет' },
+        { src: bauble1, name: 'Большой шар с рисунком', amount: 'Количество: 2', yearOfPurchase: 'Год покупки: 1960', type: 'Форма: шар', color: 'Цвет: желтый', size: 'Размер: большой', favorite: 'Любимая: нет' },
+        { src: bauble2, name: 'Зеленый шар с цветами', amount: 'Количество: 5', yearOfPurchase: 'Год покупки: 2000', type: 'Форма: шар', color: 'Цвет: зеленый', size: 'Размер: большой', favorite: 'Любимая: нет' },
+        { src: bauble3, name: 'Красный матовый шар', amount: 'Количество: 3', yearOfPurchase: 'Год покупки: 1990', type: 'Форма: шар', color: 'Цвет: красный', size: 'Размер: большой', favorite: 'Любимая: нет' },
+        { src: bauble4, name: 'Сосулька красная', amount: 'Количество: 2', yearOfPurchase: 'Год покупки: 1980', type: 'Форма: фигурка', color: 'Цвет: красный', size: 'Размер: большой', favorite: 'Любимая: нет' },
+        { src: bauble5, name: 'Красный виноград', amount: 'Количество: 4', yearOfPurchase: 'Год покупки: 1980', type: 'Форма: фигурка', color: 'Цвет: красный', size: 'Размер: средний', favorite: 'Любимая: да' },
+        { src: bauble6, name: 'Красный шар с рисунком', amount: 'Количество: 6', yearOfPurchase: 'Год покупки: 2010', type: 'Форма: шар', color: 'Цвет: красный', size: 'Размер: большой', favorite: 'Любимая: нет' },
+        { src: bauble7, name: 'Молочно-белый шар', amount: 'Количество: 12', yearOfPurchase: 'Год покупки: 1960', type: 'Форма: шар', color: 'Цвет: белый', size: 'Размер: средний', favorite: 'Любимая: да' },
+        { src: bauble8, name: 'Красный шар', amount: 'Количество: 10', yearOfPurchase: 'Год покупки: 2010', type: 'Форма: шар', color: 'Цвет: красный', size: 'Размер: большой', favorite: 'Любимая: нет' },
+        { src: bauble9, name: 'Колокольчик старинный', amount: 'Количество: 2', yearOfPurchase: 'Год покупки: 1950', type: 'Форма: колокольчик', color: 'Цвет: белый', size: 'Размер: большой', favorite: 'Любимая: нет' },
+        { src: bauble10, name: 'Белый шар ретро', amount: 'Количество: 7', yearOfPurchase: 'Год покупки: 1960', type: 'Форма: шар', color: 'Цвет: белый', size: 'Размер: большой', favorite: 'Любимая: нет' },
     ],
 
     tree: [
@@ -96,26 +96,26 @@ export const initialState = {
 
     filter: [{
         shape: [
-            { src: ball, type: 'шар'},
-            { src: bell, type: 'колокольчик'},
-            { src: figurine, type: 'фигурка'},
-            { src: pine, type: 'шишка'},
-            { src: snowflake, type: 'снежинка'},
-            { src: star, type: 'звезда'},
+            { src: ball, type: 'Форма: шар'},
+            { src: bell, type: 'Форма: колокольчик'},
+            { src: figurine, type: 'Форма: фигурка'},
+            { src: pine, type: 'Форма: шишка'},
+            { src: snowflake, type: 'Форма: снежинка'},
+            { src: star, type: 'Форма: звезда'},
         ],
 
-        colours: [
-            { src: white, colour: 'белый'},
-            { src: blue, colour: 'синий'},
-            { src: green, colour: 'зеленый'},
-            { src: red, colour: 'красный'},
-            { src: yellow, colour: 'желтый'},
+        colors: [
+            { src: white, color: 'Цвет: белый'},
+            { src: blue, color: 'Цвет: синий'},
+            { src: green, color: 'Цвет: зеленый'},
+            { src: red, color: 'Цвет: красный'},
+            { src: yellow, color: 'Цвет: желтый'},
         ],
 
         size: [
-            { id: 1, label: 'Большой' },
-            { id: 1, label: 'Средний' },
-            { id: 1, label: 'Маленький' },
+            { id: 1, label: 'Размер: большой' },
+            { id: 1, label: 'Размер: средний' },
+            { id: 1, label: 'Размер: маленький' },
         ],
 
     }],
