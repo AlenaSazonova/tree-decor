@@ -12,16 +12,10 @@ import {
     from './Filtration.style';
 
 
-const Filtration = ({ onShapeFilter, onColorFilter, onSizeFilter }) => {
+const Filtration = ({ onShapeFilter, onColorFilter, onSizeFilter, onAmountFilter, onYearFilter, currentAmount, currentYear }) => {    
     const shapeFilter = initialState.filter[0].shape;
-    //console.log(shapeFilter);
-
     const colorFilter = initialState.filter[0].colors; 
-    //console.log(colourFilter);
-
     const sizeFilter = initialState.filter[0].size;
-    console.log(sizeFilter);
-
 
     return (
         <Container>
@@ -71,8 +65,12 @@ const Filtration = ({ onShapeFilter, onColorFilter, onSizeFilter }) => {
                         <AmountFilterContainer>
                             <p>Количество экземпляров:</p>
                             <div>
-                                <label htmlFor="amount">1</label>
-                                <input type="range" id="amount" min="1" max="12"/>
+                            <label htmlFor="amount">{currentAmount}</label>
+                                <input 
+                                    type="range"
+                                    onChange={(e) => onAmountFilter(Number(e.target.value))}
+                                    id="amount" min="1" max="12"
+                                />
                                 <label htmlFor="amount">12</label>
                             </div>
                         </AmountFilterContainer>
@@ -80,8 +78,15 @@ const Filtration = ({ onShapeFilter, onColorFilter, onSizeFilter }) => {
                         <div>
                             <p>Год приобретения:</p>
                             <div>
-                                <label htmlFor="year">1940</label>
-                                <input type="range" id="year" min="1940" max="2020" />
+                            <label htmlFor="year">{currentYear}</label>
+                                <input 
+                                    type="range"
+                                    onChange={(e) => onYearFilter(Number(e.target.value))} 
+                                    
+                                    id="year" 
+                                    min="1940" 
+                                    max="2020" 
+                                />
                                 <label htmlFor="year">2020</label>
                             </div>
                         </div>

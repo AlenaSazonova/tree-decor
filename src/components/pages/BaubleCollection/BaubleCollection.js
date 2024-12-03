@@ -12,12 +12,12 @@ import {
 
 const BaubleCollection = () => {
     const bauble = initialState.bauble;
-    //console.log(bauble);
     const [filteredBaubles, setFilteredBaubles] = useState(bauble);
     const [selectedSize, setSelectedSize] = useState([]);
     const [selectedColor, setSelectedColor] = useState([]);
     const [selectedShape, setSelectedShape] = useState([]);
-
+    const [currentAmount, setCurrentAmount] = useState(1);
+    const [currentYear, setCurrentYear] = useState(1940);
 
 
 
@@ -77,6 +77,28 @@ const BaubleCollection = () => {
     };
 
 
+    const handleAmountFilter = (value) => {
+        setCurrentAmount(value)
+        const filtered = bauble.filter((el) => {
+            const amount = parseInt(el.amount.match(/\d+/)[0], 10);
+            return amount === value;
+        });
+
+        setFilteredBaubles(filtered);
+    };
+
+
+    const handleYearFilter = (value) => {
+        setCurrentYear(value);
+        const filtered = bauble.filter((el) => {
+            const yearOfPurchase = parseInt(el.yearOfPurchase.match(/\d+/)[0], 10);
+            return yearOfPurchase === value;
+        });
+
+        setFilteredBaubles(filtered);
+    };
+
+
     return (
         <Container>
             <Header />
@@ -84,6 +106,10 @@ const BaubleCollection = () => {
                 onShapeFilter={handleShapeClick}
                 onColorFilter={handleColorClick}
                 onSizeFilter={handleSizeClick}
+                onAmountFilter={handleAmountFilter}
+                onYearFilter={handleYearFilter}
+                currentAmount={currentAmount}
+                currentYear={currentYear}
             />
             
             <CardList>
