@@ -99,6 +99,52 @@ const BaubleCollection = () => {
     };
 
 
+    const handleNameSortAscending = () => {
+        const filtered = [...bauble].sort((a, b) => {
+            const nameA = a.name.toLowerCase();
+            const nameB = b.name.toLowerCase();
+
+            if (nameA < nameB) {
+                return -1
+            } else if (nameA < nameB) {
+                return 1
+            }
+            return 0;
+        })
+        return filtered;
+    }
+
+
+    const handleYearSort = () => {
+        const filtered = [...bauble].sort((a, b) => {
+            const yearA = parseInt(a.yearOfPurchase.match(/\d+/)[0], 10);
+            const yearB = parseInt(b.yearOfPurchase.match(/\d+/)[0], 10);
+
+            return yearA - yearB
+        })
+        return filtered;
+    }
+
+
+    const handleCommonSort = (e) => {
+        const selectOptions = e.target.value;
+        let sortedBaubles;
+
+        if (selectOptions === 'name') {
+            sortedBaubles = handleNameSortAscending()
+        } else if (selectOptions === 'year') {
+            sortedBaubles = handleYearSort()
+        }
+
+        setFilteredBaubles(sortedBaubles);
+    }
+
+
+    const handleResetFilters = () => {
+        setFilteredBaubles(bauble);
+    }
+
+
     return (
         <Container>
             <Header />
@@ -108,8 +154,10 @@ const BaubleCollection = () => {
                 onSizeFilter={handleSizeClick}
                 onAmountFilter={handleAmountFilter}
                 onYearFilter={handleYearFilter}
+                onNameFilter={handleCommonSort}
                 currentAmount={currentAmount}
                 currentYear={currentYear}
+                onResetFilters={handleResetFilters}
             />
             
             <CardList>

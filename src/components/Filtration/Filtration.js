@@ -12,7 +12,7 @@ import {
     from './Filtration.style';
 
 
-const Filtration = ({ onShapeFilter, onColorFilter, onSizeFilter, onAmountFilter, onYearFilter, currentAmount, currentYear }) => {    
+const Filtration = ({ onShapeFilter, onColorFilter, onSizeFilter, onAmountFilter, onYearFilter, currentAmount, currentYear, onNameFilter, onResetFilters }) => {    
     const shapeFilter = initialState.filter[0].shape;
     const colorFilter = initialState.filter[0].colors; 
     const sizeFilter = initialState.filter[0].size;
@@ -96,13 +96,13 @@ const Filtration = ({ onShapeFilter, onColorFilter, onSizeFilter, onAmountFilter
                 <SectionTitle>Сортировка</SectionTitle>
                     <div>
                     <SortOptionsContainer>
-                            <select name="">
-                                <option>По названию от "А" до "Я"</option>
-                                <option>По году от 1940 до 2020</option>
-                            </select>
+                        <select onChange={onNameFilter}>
+                            <option value="name">По названию от "А" до "Я"</option>
+                            <option value="year">По году от 1940 до 2020</option>
+                        </select>
                     </SortOptionsContainer>
                         <div>
-                            <button>Сброс фильтров</button>
+                            <button onClick={() => onResetFilters()}>Сброс фильтров</button>
                         </div>
                         
                     </div>
