@@ -14,65 +14,36 @@ const BaubleCollection = () => {
     const bauble = initialState.bauble;
     const [filteredBaubles, setFilteredBaubles] = useState(bauble);
     const [selectedSize, setSelectedSize] = useState([]);
-    const [selectedColor, setSelectedColor] = useState([]);
-    const [selectedShape, setSelectedShape] = useState([]);
     const [currentAmount, setCurrentAmount] = useState(1);
     const [currentYear, setCurrentYear] = useState(1940);
+    const [isFavoriteChecked, setIsFavoriteChecked] = useState(false);
+    const [favoriteCount, setFavoriteCount] = useState(0);
 
+
+    const handleUpdateFavoriteCount = (change) => {
+        setFavoriteCount((prevCount) => prevCount + change);
+    };
 
 
     const handleShapeClick = (type) => {
-        let updatedShape;
-
-        if (selectedShape.includes(type)) {
-            updatedShape = selectedShape.filter((el) => el !== type)
-        } else {
-            updatedShape = [...selectedShape, type]
-        } 
-        setSelectedShape(updatedShape);
-
-        if (updatedShape.length > 0) {
-            const filtered = bauble.filter((el) => updatedShape.includes(el.type));
-            setFilteredBaubles(filtered);
-        } else {
-            setFilteredBaubles(bauble);
-        }
+        const filtered = bauble.filter((el) => el.type === type);
+        setFilteredBaubles(filtered);
     };
 
 
     const handleColorClick = (color) => {
-        let updatedColor;
-        if (selectedColor.includes(color)) {
-            updatedColor = selectedColor.filter((el) => el !== color)
-        } else {
-            updatedColor = [...selectedColor, color]
-        }
-        setSelectedColor(updatedColor);
-
-        if (updatedColor.length > 0) {
-            const filtered = bauble.filter((el) => updatedColor.includes(el.color));
-            setFilteredBaubles(filtered);
-        } else {
-            setFilteredBaubles(bauble);
-        }
-
+        const filtered = bauble.filter((el) => el.color === color);
+        setFilteredBaubles(filtered);
     };
 
     const handleSizeClick = (size) => {
-        let updatedSizes;
-
         if (selectedSize.includes(size)) {
-            updatedSizes = selectedSize.filter((el) => el !== size)
-        } else {
-            updatedSizes  = [...selectedSize, size]
-        }
-        setSelectedSize(updatedSizes)
-
-        if(updatedSizes.length > 0) {
-            const filtered = bauble.filter((el) => updatedSizes.includes(el.size));
-            setFilteredBaubles(filtered);
-        } else {
+            setSelectedSize([]);
             setFilteredBaubles(bauble);
+        } else {
+            setSelectedSize([size]);
+            const filtered = bauble.filter((el) => el.size === size);
+            setFilteredBaubles(filtered);
         }
     };
 
@@ -140,14 +111,31 @@ const BaubleCollection = () => {
     }
 
 
+    const handleFavoriteFilter = (isChecked) => {
+        setIsFavoriteChecked(isChecked);
+        if (isChecked) {
+            const filtered = bauble.filter((el) => {
+                return el.favorite.includes('Любимая: да')
+            });
+            setFilteredBaubles(filtered);
+        } else {
+            setFilteredBaubles(bauble);
+        }
+    }
+
+
     const handleResetFilters = () => {
         setFilteredBaubles(bauble);
+        setSelectedSize([]);
+        setCurrentYear(1940);
+        setIsFavoriteChecked(false);
+        setCurrentAmount(1)
     }
 
 
     return (
         <Container>
-            <Header />
+            <Header count={favoriteCount} />
             <Filtration 
                 onShapeFilter={handleShapeClick}
                 onColorFilter={handleColorClick}
@@ -157,7 +145,10 @@ const BaubleCollection = () => {
                 onNameFilter={handleCommonSort}
                 currentAmount={currentAmount}
                 currentYear={currentYear}
+                onFavoriteFilter={handleFavoriteFilter}
+                isFavoriteChecked={isFavoriteChecked}
                 onResetFilters={handleResetFilters}
+                selectedSize={selectedSize}
             />
             
             <CardList>
@@ -172,6 +163,7 @@ const BaubleCollection = () => {
                     color={el.color}
                     size={el.size}
                     favorite={el.favorite}
+                    onUpdateCount={handleUpdateFavoriteCount}
                 />
             ))}
             </CardList>

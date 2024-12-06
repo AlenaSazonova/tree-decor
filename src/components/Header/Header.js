@@ -1,14 +1,21 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
+import ball from '../icons/svg/ball-2.svg';
+
+
 import {
     HeaderContainer,
-    Button
+    Navigation,
+    Button,
+    InfoWrapper,
+    Image,
+    AmountText
 }
     from './Header.style';
 
-const Header = () => (
+const Header = ({ count }) => {
+    return (
     <HeaderContainer>
-        <nav>
+        <Navigation>
             <Link to='/'>
                 <Button>HomePage</Button>
             </Link>
@@ -18,8 +25,13 @@ const Header = () => (
             <Link to='/TreeDecorator'>
                 <Button>Trees</Button>
             </Link>
-        </nav>
+        </Navigation>
+        <InfoWrapper>
+            <Image src={ball} alt="ball" />
+                <AmountText>{count}</AmountText>
+        </InfoWrapper>
     </HeaderContainer>
-);
+    )
+};
 
 export default Header;

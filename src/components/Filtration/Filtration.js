@@ -12,7 +12,7 @@ import {
     from './Filtration.style';
 
 
-const Filtration = ({ onShapeFilter, onColorFilter, onSizeFilter, onAmountFilter, onYearFilter, currentAmount, currentYear, onNameFilter, onResetFilters }) => {    
+const Filtration = ({ onShapeFilter, onColorFilter, onSizeFilter, onAmountFilter, onYearFilter, currentAmount, currentYear, onNameFilter, onFavoriteFilter, onResetFilters, selectedSize, isFavoriteChecked }) => {    
     const shapeFilter = initialState.filter[0].shape;
     const colorFilter = initialState.filter[0].colors; 
     const sizeFilter = initialState.filter[0].size;
@@ -45,6 +45,7 @@ const Filtration = ({ onShapeFilter, onColorFilter, onSizeFilter, onAmountFilter
                                 <label key={ind}>
                                     <input 
                                         type='checkbox' 
+                                        checked={selectedSize.includes(el.label)}
                                         onChange={() => onSizeFilter(el.label)} 
                                     />
                                     {el.label}
@@ -54,7 +55,11 @@ const Filtration = ({ onShapeFilter, onColorFilter, onSizeFilter, onAmountFilter
                         <div>
                                 <label>
                                     Только любимые
-                                    <input type="checkbox" />
+                                    <input 
+                                        type="checkbox" 
+                                        checked={isFavoriteChecked}
+                                        onChange={(e) => onFavoriteFilter(e.target.checked)}
+                                    />
                                 </label>
                         </div>
                     </div>
@@ -68,6 +73,7 @@ const Filtration = ({ onShapeFilter, onColorFilter, onSizeFilter, onAmountFilter
                             <label htmlFor="amount">{currentAmount}</label>
                                 <input 
                                     type="range"
+                                    value={currentAmount}
                                     onChange={(e) => onAmountFilter(Number(e.target.value))}
                                     id="amount" min="1" max="12"
                                 />
@@ -81,8 +87,8 @@ const Filtration = ({ onShapeFilter, onColorFilter, onSizeFilter, onAmountFilter
                             <label htmlFor="year">{currentYear}</label>
                                 <input 
                                     type="range"
+                                    value={currentYear}
                                     onChange={(e) => onYearFilter(Number(e.target.value))} 
-                                    
                                     id="year" 
                                     min="1940" 
                                     max="2020" 

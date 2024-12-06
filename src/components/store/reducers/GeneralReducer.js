@@ -12,32 +12,34 @@ import bauble8 from '../../icons/bauble/8.png';
 import bauble9 from '../../icons/bauble/9.png';
 import bauble10 from '../../icons/bauble/10.png';
 
-import tree1 from '../../icons/tree/tree1.png';
-import tree2 from '../../icons/tree/tree2.png';
-import tree3 from '../../icons/tree/tree3.png';
-import tree4 from '../../icons/tree/tree4.png';
+import tree1 from '../../icons/tree/1.png';
+import tree2 from '../../icons/tree/2.png';
+import tree3 from '../../icons/tree/3.png';
+import tree4 from '../../icons/tree/4.png';
+import tree5 from '../../icons/tree/5.png';
+import tree6 from '../../icons/tree/6.png';
 
-import background1 from '../../icons/background/1.png';
-import background2 from '../../icons/background/2.png';
-import background3 from '../../icons/background/3.png';
-import background4 from '../../icons/background/4.png';
-import background5 from '../../icons/background/5.png';
-import background6 from '../../icons/background/6.png';
-import background7 from '../../icons/background/7.png';
-import background8 from '../../icons/background/8.png';
-import background9 from '../../icons/background/9.png';
-import background10 from '../../icons/background/10.png';
+import background1 from '../../icons/background/1.jpg';
+import background2 from '../../icons/background/2.jpg';
+import background3 from '../../icons/background/3.jpg';
+import background4 from '../../icons/background/4.jpg';
+import background5 from '../../icons/background/5.jpg';
+import background6 from '../../icons/background/6.jpg';
+import background7 from '../../icons/background/7.jpg';
+import background8 from '../../icons/background/8.jpg';
+import background9 from '../../icons/background/9.jpg';
+import background10 from '../../icons/background/10.jpg';
 
 import garland1 from '../../icons/garland/Garland_1.png';
 import garland2 from '../../icons/garland/Garland_2.png';
 import garland3 from '../../icons/garland/Garland_3.png';
 
 
-import ball from '../../icons/shape/ball.png';
-import bell from '../../icons/shape/bell.png';
+import ball from '../../icons/shape/ball.svg';
+import bell from '../../icons/shape/bell.svg';
 import figurine from '../../icons/shape/bird_toy.png';
-import pine from '../../icons/shape/pine.png';
-import snowflake from '../../icons/shape/snowflake.png';
+import pine from '../../icons/shape/pine.svg';
+import snowflake from '../../icons/shape/snowflake.svg';
 import star from '../../icons/shape/star.png';
 
 
@@ -71,6 +73,8 @@ export const initialState = {
         { src: tree2 },
         { src: tree3 },
         { src: tree4 },
+        { src: tree5 },
+        { src: tree6 },
     ],
 
     background: [

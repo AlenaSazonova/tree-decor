@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import favoriteImg from '../icons/favourite/Screenshot 2024-11-26 at 14.24.52.png';
 import {
     CardContainer, 
@@ -14,7 +14,29 @@ import {
     from './BaubleCard.style';
 
 
-const BaubleCard = ({ name, baubleImg, amount, yearOfPurchase, type, color, size, favorite }) => {
+const BaubleCard = ({ 
+        name, 
+        baubleImg, 
+        amount, 
+        yearOfPurchase, 
+        type, 
+        color, 
+        size, 
+        favorite, 
+        onUpdateCount 
+    }) => {
+
+    const [isFavorite, setIsFavorite] = useState(false);
+
+    const handleFavoriteToggle = () => {
+        if (isFavorite) {
+            onUpdateCount(-1);
+        } else {
+            onUpdateCount(1);
+        }
+        setIsFavorite(!isFavorite);
+    };
+    
     return (
         <CardContainer>
             <CardHeader>
@@ -23,7 +45,7 @@ const BaubleCard = ({ name, baubleImg, amount, yearOfPurchase, type, color, size
             <ContentSection>
                 <CardImageWrapper>
                     <CardImage src={baubleImg} alt="bauble" />
-                    <FavoriteButton>
+                    <FavoriteButton onClick={() => handleFavoriteToggle()}>
                         <FavoriteIcon src={favoriteImg} alt="favorite" />
                     </FavoriteButton>
                 </CardImageWrapper>
