@@ -18,10 +18,11 @@ const BaubleCollection = () => {
     const [currentYear, setCurrentYear] = useState(1940);
     const [isFavoriteChecked, setIsFavoriteChecked] = useState(false);
     const [favoriteCount, setFavoriteCount] = useState(0);
+    const [baubleState, setBaubleState] = useState(initialState.bauble);
 
 
-    const handleUpdateFavoriteCount = (change) => {
-        setFavoriteCount((prevCount) => prevCount + change);
+    const handleUpdateFavoriteCount = (amount) => {
+        setFavoriteCount((prevCount) => prevCount + amount);
     };
 
 
@@ -114,13 +115,33 @@ const BaubleCollection = () => {
     const handleFavoriteFilter = (isChecked) => {
         setIsFavoriteChecked(isChecked);
         if (isChecked) {
-            const filtered = bauble.filter((el) => {
-                return el.favorite.includes('Любимая: да')
-            });
+            const filtered = baubleState.filter((el) => el.favorite === 'Любимая: да');
             setFilteredBaubles(filtered);
         } else {
-            setFilteredBaubles(bauble);
+            setFilteredBaubles(baubleState);
         }
+    }
+
+
+    const updateFavoriteStatus = (name, isFavorite) => {
+        const updatedBaubles = baubleState.map((el) => {
+            if (el.name === name) {
+                return {
+                    ...el,
+                    favorite: isFavorite ? 'Любимая: да' : 'Любимая: нет',
+                }
+            }
+            return el
+        })
+        setBaubleState(updatedBaubles);
+
+        setFilteredBaubles((prevFiltered) =>
+            prevFiltered.map((el) =>
+                el.name === name
+                    ? { ...el, favorite: isFavorite ? 'Любимая: да' : 'Любимая: нет' }
+                    : el
+            )
+        );
     }
 
 
@@ -129,7 +150,8 @@ const BaubleCollection = () => {
         setSelectedSize([]);
         setCurrentYear(1940);
         setIsFavoriteChecked(false);
-        setCurrentAmount(1)
+        setCurrentAmount(1);
+        setFavoriteCount(0);
     }
 
 
@@ -164,6 +186,7 @@ const BaubleCollection = () => {
                     size={el.size}
                     favorite={el.favorite}
                     onUpdateCount={handleUpdateFavoriteCount}
+                    onFavoriteChange={updateFavoriteStatus}
                 />
             ))}
             </CardList>

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import favoriteImg from '../icons/favourite/Screenshot 2024-11-26 at 14.24.52.png';
+
 import {
     CardContainer, 
     CardHeader,
@@ -23,18 +24,20 @@ const BaubleCard = ({
         color, 
         size, 
         favorite, 
-        onUpdateCount 
+        onUpdateCount,
+        onFavoriteChange
     }) => {
 
-    const [isFavorite, setIsFavorite] = useState(false);
-
     const handleFavoriteToggle = () => {
-        if (isFavorite) {
+        let isFavorite;
+        if (favorite === 'Любимая: да') {
+            isFavorite = false;
             onUpdateCount(-1);
         } else {
+            isFavorite = true;
             onUpdateCount(1);
         }
-        setIsFavorite(!isFavorite);
+        onFavoriteChange(name, isFavorite);
     };
     
     return (
