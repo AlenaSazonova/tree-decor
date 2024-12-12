@@ -4,10 +4,6 @@ import mute from '../../icons/svg/mute.svg';
 import snow from '../../icons/svg/snow.svg';
 import { initialState } from '../../store/reducers/GeneralReducer';
 import audioMP3 from '../../audio/audio.mp3';
-
-
-
-
 import {
     Container,
     ContainerForContent,
@@ -29,16 +25,25 @@ import {
     GarlandImg,
     ButtonSection,
     SaveButton,
-    ResetButton
+    ResetButton,
+
+    BackgroundImgBasic
 }
     from './TreeDecorator.style';
 
 const TreeDecorator = () => {
-    const [audioStatus, setAudioStatus] = useState(false)
     const tree = initialState.tree;
     const background = initialState.background;
     const garland = initialState.garland;
     const audioRef = useRef(new Audio(audioMP3));
+
+    const [audioStatus, setAudioStatus] = useState(false);
+    const [selectedImage, setSelectedImage] = useState(background[0]);
+
+
+    const handleThumbnailClick = (image) => {
+        setSelectedImage(image);
+    }
 
 
     const startAudio = () => {
@@ -97,6 +102,7 @@ const TreeDecorator = () => {
                                     <BackgroundImg
                                         src={el.src}
                                         alt={el.alt}
+                                        onClick={() => handleThumbnailClick(el)}
                                     />
                                 </button>
                             ))}
@@ -125,10 +131,11 @@ const TreeDecorator = () => {
 
 
 
-
-
                 <div>
-                    <div>empty</div>
+                    <BackgroundImgBasic
+                        src={selectedImage.src}
+                        alt={selectedImage.alt}
+                    />
                 </div>
 
                 <div>

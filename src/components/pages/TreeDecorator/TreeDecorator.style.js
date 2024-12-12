@@ -128,3 +128,9 @@ border-radius: 20px;
         background: #4b8b3a;
     }
 `;
+
+
+export const BackgroundImgBasic = styled.img`
+    width: 730px;
+    height: 860px;
+`;
