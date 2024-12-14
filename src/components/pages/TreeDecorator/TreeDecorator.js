@@ -4,6 +4,9 @@ import mute from '../../icons/svg/mute.svg';
 import snow from '../../icons/svg/snow.svg';
 import { initialState } from '../../store/reducers/GeneralReducer';
 import audioMP3 from '../../audio/audio.mp3';
+import Snowfall from '../../effects/Snowfall';
+
+
 import {
     Container,
     ContainerForContent,
@@ -37,12 +40,18 @@ const TreeDecorator = () => {
     const garland = initialState.garland;
     const audioRef = useRef(new Audio(audioMP3));
 
+    const [showSnow, setShowSnow] = useState(false);
     const [audioStatus, setAudioStatus] = useState(false);
     const [selectedImage, setSelectedImage] = useState(background[0]);
 
 
     const handleThumbnailClick = (image) => {
         setSelectedImage(image);
+    }
+
+
+    const handleToggleSnow = () => {
+        setShowSnow(!showSnow)
     }
 
 
@@ -75,7 +84,7 @@ const TreeDecorator = () => {
                         <ButtonMuteImg onClick={audioStatus ? pauseAudio : startAudio}>
                             <MuteImg src={mute} alt={audioStatus ? "pause" : "start"} />
                         </ButtonMuteImg>
-                        <ButtonSnowImg>
+                        <ButtonSnowImg onClick={handleToggleSnow}>
                             <SnowImg src={snow} alt="snow" />
                         </ButtonSnowImg>
                     </ControlSection>
@@ -131,11 +140,16 @@ const TreeDecorator = () => {
 
 
 
-                <div>
+
+
+
+
+                <div style={{ position: "relative" }}>
                     <BackgroundImgBasic
                         src={selectedImage.src}
                         alt={selectedImage.alt}
                     />
+                    {showSnow && <Snowfall />}
                 </div>
 
                 <div>
