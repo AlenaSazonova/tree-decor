@@ -30,10 +30,6 @@ import background8 from '../../icons/background/8.jpg';
 import background9 from '../../icons/background/9.jpg';
 import background10 from '../../icons/background/10.jpg';
 
-import garland1 from '../../icons/garland/Garland_1.png';
-import garland2 from '../../icons/garland/Garland_2.png';
-import garland3 from '../../icons/garland/Garland_3.png';
-
 
 import ball from '../../icons/shape/ball.svg';
 import bell from '../../icons/shape/bell.svg';
@@ -88,12 +84,6 @@ export const initialState = {
         { src: background8 },
         { src: background9 },
         { src: background10 },
-    ],
-
-    garland: [
-        { src: garland1 },
-        { src: garland2 },
-        { src: garland3 },
     ],
 
 

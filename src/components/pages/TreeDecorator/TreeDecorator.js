@@ -5,6 +5,7 @@ import snow from '../../icons/svg/snow.svg';
 import { initialState } from '../../store/reducers/GeneralReducer';
 import audioMP3 from '../../audio/audio.mp3';
 import Snowfall from '../../effects/Snowfall';
+import GarlandOverlayWithLights from '../../effects/GarlandOverlayWithLights/GarlandOverlayWithLights';
 
 
 import {
@@ -24,31 +25,46 @@ import {
     BackgroundButtonImgContainer,
     BackgroundImg,
     GarlandSelectionSection,
-    GarlandButtonImgContainer,
-    GarlandImg,
+    ColorAndToggleContainer,
+    GarlandButtonContainer,
+    ButtonColor,
+    ToggleButton,
+    ToggleText,
+    ToggleKnob,
     ButtonSection,
     SaveButton,
     ResetButton,
 
-    BackgroundImgBasic
+    BackgroundImgBasic,
+    TreeImgBasic,
 }
     from './TreeDecorator.style';
 
 const TreeDecorator = () => {
     const tree = initialState.tree;
     const background = initialState.background;
-    const garland = initialState.garland;
     const audioRef = useRef(new Audio(audioMP3));
+    const colors = ['linear-gradient(90deg, yellow, orange, #e009de, #812fbd)', 'red', 'blue', 'yellow', '#03f403'];
 
     const [showSnow, setShowSnow] = useState(false);
     const [audioStatus, setAudioStatus] = useState(false);
     const [selectedImage, setSelectedImage] = useState(background[0]);
+    const [selectedImageTree, setSelectedImageTree] = useState(tree[0]);
+    const [isOn, setIsOn] = useState(false);
+    const [garlandColor, setGarlandColor] = useState(null);
 
 
     const handleThumbnailClick = (image) => {
         setSelectedImage(image);
     }
 
+    const handleThumbnailTreeClick = (imageTree) => {
+        setSelectedImageTree(imageTree);
+    }
+
+    const handleGarlandClick = (color) => {
+        setGarlandColor(color);
+    }
 
     const handleToggleSnow = () => {
         setShowSnow(!showSnow)
@@ -64,6 +80,24 @@ const TreeDecorator = () => {
         audioRef.current.pause();
         setAudioStatus(false);
     }
+
+    const buttonStyle = {
+        background: isOn ? 'rgb(99 156 171)' : '#ccc',
+    };
+
+    const textStyle = {
+        marginLeft: isOn ? 'auto' : '35px',
+        marginRight: isOn ? '45px' : 'auto',
+    };
+
+    const knobStyle = {
+        transform: isOn ? 'translate(55px, -50%)' : 'translate(0, -50%)',
+    };
+
+    const handleClick = () => {
+        setIsOn((prevState) => !prevState);
+    }
+
 
     useEffect(() => {
         const audio = audioRef.current;
@@ -97,6 +131,7 @@ const TreeDecorator = () => {
                                     <TreeImg
                                         src={el.src}
                                         alt={el.alt}
+                                        onClick={() => handleThumbnailTreeClick(el)}
                                     />
                                 </TreeButton>
                             ))}
@@ -120,16 +155,17 @@ const TreeDecorator = () => {
 
                     <GarlandSelectionSection>
                         <h5>Гирлянда</h5>
-                        <GarlandButtonImgContainer>
-                            {garland.map((el, ind) => (
-                                <button key={ind}>
-                                    <GarlandImg
-                                        src={el.src}
-                                        alt={el.alt}
-                                    />
-                                </button>
-                            ))}
-                        </GarlandButtonImgContainer>
+                        <ColorAndToggleContainer>
+                            <GarlandButtonContainer>
+                                {colors.map((color, index) => (
+                                    <ButtonColor key={index} color={color} onClick={() => handleGarlandClick(color)} />
+                                ))}
+                            </GarlandButtonContainer>
+                            <ToggleButton style={buttonStyle} onClick={handleClick}>
+                                <ToggleText style={textStyle}>{isOn ? "Вкл" : "Выкл"}</ToggleText>
+                                <ToggleKnob style={knobStyle} />
+                            </ToggleButton>
+                        </ColorAndToggleContainer>
                     </GarlandSelectionSection>
 
                     <ButtonSection>
@@ -149,11 +185,23 @@ const TreeDecorator = () => {
                         src={selectedImage.src}
                         alt={selectedImage.alt}
                     />
+                    <TreeImgBasic
+                        src={selectedImageTree.src}
+                        alt={selectedImageTree.alt}
+                        style={{
+                            
+                        }}
+                    />
+                    <GarlandOverlayWithLights 
+                        color={garlandColor} 
+                        isOn={isOn} 
+                    />
                     {showSnow && <Snowfall />}
                 </div>
 
                 <div>
-                    <div>empty</div>
+                    <div>Игрушки</div>
+                    <div>Вы нарядили</div>
                 </div>
             </ContainerForContent>
         </Container>

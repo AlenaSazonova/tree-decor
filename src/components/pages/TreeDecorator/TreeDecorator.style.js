@@ -10,7 +10,7 @@ export const ContainerForContent = styled.div`
 `;
 
 export const DecoratorWrapper = styled.div`
-    width: 440px;
+    max-width: 440px;
 `;
 
 export const ControlSection = styled.div`
@@ -75,18 +75,76 @@ export const GarlandSelectionSection = styled.div`
     margin-bottom: 36px;
 `;
 
-export const GarlandButtonImgContainer = styled.div`
+export const ColorAndToggleContainer = styled.div`
     display: flex;
-    flex-direction: column;
+    justify-content: space-around;
+`;
+
+export const GarlandButtonContainer = styled.div`
+    display: flex;
     align-items: center;
     gap: 20px;
 `;
 
-export const GarlandImg = styled.img`
-    width: 284px;
+export const ButtonColor = styled.button`
+    width: 30px;
+    height: 30px;
+    background: ${(props) => props.color || "gray"};
+    border-radius: 50%;
+    border: 1px solid;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 0 15px 3px ${(props) => props.color || "rgba(0, 0, 0, 0.25)"};
+
+    &:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px 5px ${(props) => props.color || "rgba(0, 0, 0, 0.35)"};
+    }
 `;
 
 export const ButtonSection = styled.div`
+`;
+
+export const ToggleButton = styled.button`
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 95px;
+    height: 35px;
+    background: #ccc;
+    border-radius: 30px;
+    padding: 5px;
+    cursor: pointer;
+    border: none;
+    transition: background 0.3s ease;
+    position: relative;
+    outline: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+
+    &:focus {
+        box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.5);
+    }
+`;
+
+export const ToggleText = styled.span`
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    transition: margin 0.3s ease;
+`;
+
+export const ToggleKnob = styled.div`
+    width: 30px;
+    height: 30px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transform: translate(0, -50%);
 `;
 
 export const SaveButton = styled.button`
@@ -131,6 +189,15 @@ border-radius: 20px;
 
 
 export const BackgroundImgBasic = styled.img`
-    width: 730px;
+    max-width: 730px;
     height: 860px;
+`;
+
+export const TreeImgBasic = styled.img`
+    position: absolute;
+    top: 58%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    max-height: 100%;
 `;
