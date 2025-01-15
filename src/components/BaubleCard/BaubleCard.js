@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import favoriteImg from '../icons/favourite/Screenshot 2024-11-26 at 14.24.52.png';
+import { CartContext } from '../context/CartContext';
 
 import {
     CardContainer, 
@@ -28,14 +29,20 @@ const BaubleCard = ({
         onFavoriteChange
     }) => {
 
+    const { addToCart } = useContext(CartContext);
+    const { removeFromCart } = useContext(CartContext);
+
     const handleFavoriteToggle = () => {
         let isFavorite;
         if (favorite === 'Любимая: да') {
             isFavorite = false;
             onUpdateCount(-1);
+            removeFromCart({ src: baubleImg, name, amount }); 
         } else {
             isFavorite = true;
             onUpdateCount(1);
+
+            addToCart({ src: baubleImg, name, amount });
         }
         onFavoriteChange(name, isFavorite);
     };
@@ -48,7 +55,7 @@ const BaubleCard = ({
             <ContentSection>
                 <CardImageWrapper>
                     <CardImage src={baubleImg} alt="bauble" />
-                    <FavoriteButton onClick={() => handleFavoriteToggle()}>
+                    <FavoriteButton onClick={handleFavoriteToggle}>
                         <FavoriteIcon src={favoriteImg} alt="favorite" />
                     </FavoriteButton>
                 </CardImageWrapper>

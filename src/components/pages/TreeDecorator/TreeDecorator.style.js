@@ -1,16 +1,17 @@
 import styled from "styled-components";
 
-
 export const Container = styled.div`
     
 `;
 
 export const ContainerForContent = styled.div`
     display: flex;
+    justify-content: center;
+    margin: 0 50px;
 `;
 
 export const DecoratorWrapper = styled.div`
-    max-width: 440px;
+    flex: 0 0 27%;
 `;
 
 export const ControlSection = styled.div`
@@ -41,7 +42,7 @@ export const TreeSelectionSection = styled.div`
 export const TreeButtonImgContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
     gap: 16px;
 `;
 
@@ -51,7 +52,7 @@ export const TreeImg = styled.img`
 `;
 
 export const TreeButton = styled.button`
-    flex: 1 1 33.33%;
+    width: calc(33.33% - 10.66px);
     max-width: 134px;
 `;
 
@@ -62,12 +63,16 @@ export const BackgroundSelectionSection = styled.div`
 export const BackgroundButtonImgContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-between;
     gap: 16px;
 `;
 
+export const BackgroundButton = styled.button`
+    
+`;
+
 export const BackgroundImg = styled.img`
-    width: 68px;
+    max-width: 68px;
     height: 68px;
 `;
 
@@ -168,7 +173,7 @@ export const SaveButton = styled.button`
 `;
 
 export const ResetButton = styled.button`
-border-radius: 20px;
+    border-radius: 20px;
     max-width: 150px;
     width: 100%;
     height: 50px;
@@ -188,8 +193,14 @@ border-radius: 20px;
 `;
 
 
+export const ContainerForTree = styled.div`
+    position: relative;
+    margin-right: 50px;
+    margin-left: 50px;
+`;
+
 export const BackgroundImgBasic = styled.img`
-    max-width: 730px;
+    max-width: 700px;
     height: 860px;
 `;
 
@@ -200,4 +211,58 @@ export const TreeImgBasic = styled.img`
     transform: translate(-50%, -50%);
     max-width: 100%;
     max-height: 100%;
+`;
+
+
+
+export const ContainerForCart = styled.div`
+    flex: 0 0 20%;
+`;
+
+export const ContainerForBaubles = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+
+export const CartItemsWrapper = styled.div`
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+`;
+
+export const CartItem = styled.div`
+    width: calc(25% - 8px); /* 25% ширины с учетом gap */
+    height: 80px;
+    max-width: 80px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background: radial-gradient(109.56% 109.56% at 0% -2.94%, rgba(255, 255, 255, 0.5) 0%, rgba(179, 246, 255, 0.5) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
+
+export const CartItemImage = styled.img`
+    height: 60px;
+`;
+
+export const CartItemText = styled.p`
+    width: 22px;
+    height: 19px;
+    border-radius: 50%;
+    background: #24C5DB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 17px;
+    position: absolute;
+    bottom: 1px;
+    right: 1px;
 `;

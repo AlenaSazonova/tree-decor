@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
 import Header from '../../Header/Header';
 import mute from '../../icons/svg/mute.svg';
 import snow from '../../icons/svg/snow.svg';
@@ -6,6 +6,7 @@ import { initialState } from '../../store/reducers/GeneralReducer';
 import audioMP3 from '../../audio/audio.mp3';
 import Snowfall from '../../effects/Snowfall';
 import GarlandOverlayWithLights from '../../effects/GarlandOverlayWithLights/GarlandOverlayWithLights';
+import { CartContext } from '../../context/CartContext';
 
 
 import {
@@ -23,6 +24,7 @@ import {
     TreeImg,
     BackgroundSelectionSection,
     BackgroundButtonImgContainer,
+    BackgroundButton,
     BackgroundImg,
     GarlandSelectionSection,
     ColorAndToggleContainer,
@@ -35,8 +37,16 @@ import {
     SaveButton,
     ResetButton,
 
+    ContainerForTree,
     BackgroundImgBasic,
     TreeImgBasic,
+
+    ContainerForCart,
+    ContainerForBaubles,
+    CartItemsWrapper,
+    CartItem,
+    CartItemImage,
+    CartItemText,
 }
     from './TreeDecorator.style';
 
@@ -52,6 +62,9 @@ const TreeDecorator = () => {
     const [selectedImageTree, setSelectedImageTree] = useState(tree[0]);
     const [isOn, setIsOn] = useState(false);
     const [garlandColor, setGarlandColor] = useState(null);
+
+    const { cart } = useContext(CartContext);
+
 
 
     const handleThumbnailClick = (image) => {
@@ -142,13 +155,13 @@ const TreeDecorator = () => {
                         <h5>Выберите фон</h5>
                         <BackgroundButtonImgContainer>
                             {background.map((el, ind) => (
-                                <button key={ind}>
+                                <BackgroundButton key={ind}>
                                     <BackgroundImg
                                         src={el.src}
                                         alt={el.alt}
                                         onClick={() => handleThumbnailClick(el)}
                                     />
-                                </button>
+                                </BackgroundButton>
                             ))}
                         </BackgroundButtonImgContainer>
                     </BackgroundSelectionSection>
@@ -180,7 +193,7 @@ const TreeDecorator = () => {
 
 
 
-                <div style={{ position: "relative" }}>
+                <ContainerForTree>
                     <BackgroundImgBasic
                         src={selectedImage.src}
                         alt={selectedImage.alt}
@@ -197,12 +210,29 @@ const TreeDecorator = () => {
                         isOn={isOn} 
                     />
                     {showSnow && <Snowfall />}
-                </div>
+                </ContainerForTree>
 
-                <div>
-                    <div>Игрушки</div>
-                    <div>Вы нарядили</div>
-                </div>
+
+
+                <ContainerForCart>
+                    <ContainerForBaubles>
+                        <div>Игрушки</div>
+                        <CartItemsWrapper>
+                            {cart.map((item, index) => (
+                                <CartItem key={index}>
+                                    <CartItemImage src={item.src} alt={item.name} />
+                                    <CartItemText>{item.amount.split(": ")[1]}</CartItemText>
+                                </CartItem>
+                            ))}
+                        </CartItemsWrapper>
+                    </ContainerForBaubles>
+
+
+                    <div>
+                        <div>Вы нарядили</div>
+                        <div>ImageTrees</div>
+                    </div>
+                </ContainerForCart>
             </ContainerForContent>
         </Container>
     );

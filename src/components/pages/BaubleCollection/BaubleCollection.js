@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Header from '../../Header/Header';
 import BaubleCard from '../../BaubleCard/BaubleCard';
 import Filtration from '../../Filtration/Filtration';
-import { initialState } from '../../store/reducers/GeneralReducer'
+import { initialState } from '../../store/reducers/GeneralReducer';
 
 import {
     Container,
