@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import favoriteImg from '../icons/favourite/Screenshot 2024-11-26 at 14.24.52.png';
-import { CartContext } from '../context/CartContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToFavorites, removeFromFavorites } from '../store/reducers/GeneralReducer';
 
 import {
     CardContainer, 
@@ -29,22 +30,23 @@ const BaubleCard = ({
         onFavoriteChange
     }) => {
 
-    const { addToCart } = useContext(CartContext);
-    const { removeFromCart } = useContext(CartContext);
+    const dispatch = useDispatch(); 
+    const favorites = useSelector((state) => state.baubles.favorites);
+    const isFavorite = favorites.some((el => el.name === name));
+    console.log(isFavorite);
+
 
     const handleFavoriteToggle = () => {
-        let isFavorite;
-        if (favorite === 'Любимая: да') {
-            isFavorite = false;
-            onUpdateCount(-1);
-            removeFromCart({ src: baubleImg, name, amount }); 
-        } else {
-            isFavorite = true;
-            onUpdateCount(1);
+        const newIsFavorite = !isFavorite;
 
-            addToCart({ src: baubleImg, name, amount });
+        if (newIsFavorite) {
+            dispatch(addToFavorites({ src: baubleImg, amount }))
+            onUpdateCount(1);
+        } else {
+            dispatch(removeFromFavorites({ src: baubleImg, amount }))
+            onUpdateCount(-1);
         }
-        onFavoriteChange(name, isFavorite);
+        onFavoriteChange(name, newIsFavorite);
     };
     
     return (

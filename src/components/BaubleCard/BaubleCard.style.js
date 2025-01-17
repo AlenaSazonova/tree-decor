@@ -22,7 +22,8 @@ export const CardImageWrapper = styled.div`
 `;
 
 export const CardImage = styled.img`
-    
+    width: 130px;
+    height: 160px;
 `;
 
 export const FavoriteButton = styled.button`

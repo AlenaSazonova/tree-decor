@@ -5,16 +5,13 @@ import './index.css';
 import App from './App';
 import store from './components/store/store';
 import reportWebVitals from './reportWebVitals';
-import { CartProvider } from './components/context/CartContext';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
     <Provider store={store}>
-        <CartProvider>
         <App />
-        </CartProvider>
     </Provider>
 );
 

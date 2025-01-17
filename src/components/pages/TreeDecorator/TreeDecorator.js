@@ -1,4 +1,5 @@
-import React, { useRef, useState, useEffect, useContext } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import Header from '../../Header/Header';
 import mute from '../../icons/svg/mute.svg';
 import snow from '../../icons/svg/snow.svg';
@@ -6,7 +7,6 @@ import { initialState } from '../../store/reducers/GeneralReducer';
 import audioMP3 from '../../audio/audio.mp3';
 import Snowfall from '../../effects/Snowfall';
 import GarlandOverlayWithLights from '../../effects/GarlandOverlayWithLights/GarlandOverlayWithLights';
-import { CartContext } from '../../context/CartContext';
 
 
 import {
@@ -51,6 +51,7 @@ import {
     from './TreeDecorator.style';
 
 const TreeDecorator = () => {
+    const favorites = useSelector(state => state.baubles.favorites);
     const tree = initialState.tree;
     const background = initialState.background;
     const audioRef = useRef(new Audio(audioMP3));
@@ -63,7 +64,6 @@ const TreeDecorator = () => {
     const [isOn, setIsOn] = useState(false);
     const [garlandColor, setGarlandColor] = useState(null);
 
-    const { cart } = useContext(CartContext);
 
 
 
@@ -216,9 +216,9 @@ const TreeDecorator = () => {
 
                 <ContainerForCart>
                     <ContainerForBaubles>
-                        <div>Игрушки</div>
+                        <h5>Игрушки</h5>
                         <CartItemsWrapper>
-                            {cart.map((item, index) => (
+                            {favorites.map((item, index) => (
                                 <CartItem key={index}>
                                     <CartItemImage src={item.src} alt={item.name} />
                                     <CartItemText>{item.amount.split(": ")[1]}</CartItemText>
