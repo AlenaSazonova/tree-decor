@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import favoriteImg from '../icons/favourite/Screenshot 2024-11-26 at 14.24.52.png';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addToFavorites, removeFromFavorites } from '../store/reducers/GeneralReducer';
 
 import {
@@ -30,20 +30,19 @@ const BaubleCard = ({
     }) => {
 
     const dispatch = useDispatch(); 
-    const favorites = useSelector((state) => state.baubles.favorites);
-    const isFavorite = favorites.some((el => el.name === name));
+    const [isFavorite, setIsFavorite] = useState(favorite === "Любимая: да");
 
 
     const handleFavoriteToggle = () => {
-        const newIsFavorite = !isFavorite;
+        const newFavoriteStatus = !isFavorite;
+        setIsFavorite(newFavoriteStatus);
 
-        if (newIsFavorite) {
-            dispatch(addToFavorites({ src: baubleImg, amount }))
+        if (newFavoriteStatus) {
+            dispatch(addToFavorites({ src: baubleImg, amount }));
         } else {
-            dispatch(removeFromFavorites({ src: baubleImg, amount }))
+            dispatch(removeFromFavorites({ src: baubleImg, amount }));
         }
-        onFavoriteChange(name, newIsFavorite);
-    };
+        onFavoriteChange(name, newFavoriteStatus);    };
     
     return (
         <CardContainer>
@@ -64,7 +63,7 @@ const BaubleCard = ({
                     <DetailItem>{type}</DetailItem>
                     <DetailItem>{color}</DetailItem>
                     <DetailItem>{size}</DetailItem>
-                    <DetailItem>{favorite}</DetailItem>
+                    <DetailItem>{isFavorite ? "Любимая: да" : "Любимая: нет"}</DetailItem>
                 </CardDetails>
             </ContentSection>
         </CardContainer>

@@ -150,7 +150,7 @@ const baublesSlice = createSlice({
             const item = state.bauble.find(bauble => bauble.src === action.payload.src);
             if (item && !state.favorites.includes(item)) {
                 state.favorites.push(item);
-                item.favorite = true;
+                item.favorite = 'Любимая: да';
                 state.favoriteCount += 1
             }
         },
@@ -158,7 +158,7 @@ const baublesSlice = createSlice({
             state.favorites = state.favorites.filter(el => el.src !== action.payload.src);
             const item = state.bauble.find(bauble => bauble.src === action.payload.src);
             if (item) {
-                item.favorite = false;
+                item.favorite = 'Любимая: нет';
                 state.favoriteCount -= 1
             }
         }

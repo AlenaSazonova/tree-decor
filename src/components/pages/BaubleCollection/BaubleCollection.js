@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-//import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Header from '../../Header/Header';
 import BaubleCard from '../../BaubleCard/BaubleCard';
 import Filtration from '../../Filtration/Filtration';
-import { initialState } from '../../store/reducers/GeneralReducer';
+import { addToFavorites, removeFromFavorites } from '../../store/reducers/GeneralReducer';
 
 import {
     Container,
@@ -12,13 +12,14 @@ import {
     from './BaubleCollection.style';
 
 const BaubleCollection = () => {
-    const bauble = initialState.bauble;
+    const dispatch = useDispatch();
+    const bauble = useSelector((state) => state.baubles.bauble) ;
+    const favorites = useSelector((state) => state.baubles.favorites);
     const [filteredBaubles, setFilteredBaubles] = useState(bauble);
     const [selectedSize, setSelectedSize] = useState([]);
     const [currentAmount, setCurrentAmount] = useState(1);
     const [currentYear, setCurrentYear] = useState(1940);
     const [isFavoriteChecked, setIsFavoriteChecked] = useState(false);
-    const [baubleState, setBaubleState] = useState(initialState.bauble);
 
 
     const handleShapeClick = (type) => {
@@ -110,33 +111,19 @@ const BaubleCollection = () => {
     const handleFavoriteFilter = (isChecked) => {
         setIsFavoriteChecked(isChecked);
         if (isChecked) {
-            const filtered = baubleState.filter((el) => el.favorite === 'Любимая: да');
-            setFilteredBaubles(filtered);
+            setFilteredBaubles(favorites);
         } else {
-            setFilteredBaubles(baubleState);
+            setFilteredBaubles(bauble);
         }
     }
 
 
     const updateFavoriteStatus = (name, isFavorite) => {
-        const updatedBaubles = baubleState.map((el) => {
-            if (el.name === name) {
-                return {
-                    ...el,
-                    favorite: isFavorite ? 'Любимая: да' : 'Любимая: нет',
-                }
-            }
-            return el
-        })
-        setBaubleState(updatedBaubles);
-
-        setFilteredBaubles((prevFiltered) =>
-            prevFiltered.map((el) =>
-                el.name === name
-                    ? { ...el, favorite: isFavorite ? 'Любимая: да' : 'Любимая: нет' }
-                    : el
-            )
-        );
+        if (isFavorite) {
+            dispatch(addToFavorites({ name }))
+        } else {
+            dispatch(removeFromFavorites({ name }))
+        }
     }
 
 
