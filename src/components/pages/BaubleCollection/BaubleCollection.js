@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+//import { useSelector } from 'react-redux';
 import Header from '../../Header/Header';
 import BaubleCard from '../../BaubleCard/BaubleCard';
 import Filtration from '../../Filtration/Filtration';
@@ -17,13 +18,7 @@ const BaubleCollection = () => {
     const [currentAmount, setCurrentAmount] = useState(1);
     const [currentYear, setCurrentYear] = useState(1940);
     const [isFavoriteChecked, setIsFavoriteChecked] = useState(false);
-    const [favoriteCount, setFavoriteCount] = useState(0);
     const [baubleState, setBaubleState] = useState(initialState.bauble);
-
-
-    const handleUpdateFavoriteCount = (amount) => {
-        setFavoriteCount((prevCount) => prevCount + amount);
-    };
 
 
     const handleShapeClick = (type) => {
@@ -151,13 +146,12 @@ const BaubleCollection = () => {
         setCurrentYear(1940);
         setIsFavoriteChecked(false);
         setCurrentAmount(1);
-        setFavoriteCount(0);
     }
 
 
     return (
         <Container>
-            <Header count={favoriteCount} />
+            <Header />
             <Filtration 
                 onShapeFilter={handleShapeClick}
                 onColorFilter={handleColorClick}
@@ -185,7 +179,6 @@ const BaubleCollection = () => {
                     color={el.color}
                     size={el.size}
                     favorite={el.favorite}
-                    onUpdateCount={handleUpdateFavoriteCount}
                     onFavoriteChange={updateFavoriteStatus}
                 />
             ))}

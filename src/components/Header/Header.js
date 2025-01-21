@@ -1,3 +1,5 @@
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ball from '../icons/svg/ball-2.svg';
 
@@ -12,7 +14,9 @@ import {
 }
     from './Header.style';
 
-const Header = ({ count }) => {
+const Header = () => {
+    const favoriteCount = useSelector((state) => state.baubles.favoriteCount);
+
     return (
     <HeaderContainer>
         <Navigation>
@@ -28,7 +32,7 @@ const Header = ({ count }) => {
         </Navigation>
         <InfoWrapper>
             <Image src={ball} alt="ball" />
-                <AmountText>{count}</AmountText>
+                <AmountText>{favoriteCount}</AmountText>
         </InfoWrapper>
     </HeaderContainer>
     )

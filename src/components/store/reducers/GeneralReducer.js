@@ -87,6 +87,8 @@ export const initialState = {
 
     favorites: [],
 
+    favoriteCount: 0,
+
     tree: [
         { src: tree1 },
         { src: tree2 },
@@ -149,6 +151,7 @@ const baublesSlice = createSlice({
             if (item && !state.favorites.includes(item)) {
                 state.favorites.push(item);
                 item.favorite = true;
+                state.favoriteCount += 1
             }
         },
         removeFromFavorites: (state, action) => {
@@ -156,6 +159,7 @@ const baublesSlice = createSlice({
             const item = state.bauble.find(bauble => bauble.src === action.payload.src);
             if (item) {
                 item.favorite = false;
+                state.favoriteCount -= 1
             }
         }
     },

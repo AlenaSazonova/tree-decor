@@ -222,6 +222,7 @@ export const ContainerForCart = styled.div`
 export const ContainerForBaubles = styled.div`
     display: flex;
     flex-direction: column;
+    min-height: 500px;
 `;
 
 export const CartItemsWrapper = styled.div`

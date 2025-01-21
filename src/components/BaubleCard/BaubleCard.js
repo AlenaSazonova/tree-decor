@@ -26,14 +26,12 @@ const BaubleCard = ({
         color, 
         size, 
         favorite, 
-        onUpdateCount,
         onFavoriteChange
     }) => {
 
     const dispatch = useDispatch(); 
     const favorites = useSelector((state) => state.baubles.favorites);
     const isFavorite = favorites.some((el => el.name === name));
-    console.log(isFavorite);
 
 
     const handleFavoriteToggle = () => {
@@ -41,10 +39,8 @@ const BaubleCard = ({
 
         if (newIsFavorite) {
             dispatch(addToFavorites({ src: baubleImg, amount }))
-            onUpdateCount(1);
         } else {
             dispatch(removeFromFavorites({ src: baubleImg, amount }))
-            onUpdateCount(-1);
         }
         onFavoriteChange(name, newIsFavorite);
     };
