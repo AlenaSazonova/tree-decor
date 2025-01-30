@@ -8,7 +8,7 @@ import {
 
 const GarlandOverlayWithLights = ({ color = "red", isOn }) => {
     const lights = [
-        { top: "20%", left: "49%", delay: "0s" },
+        { top: "19%", left: "49%", delay: "0s" },
         // Уровень 1
         { top: "25%", left: "46%", delay: "0.2s" },
         { top: "25%", left: "52%", delay: "0.4s" },
@@ -59,11 +59,11 @@ const GarlandOverlayWithLights = ({ color = "red", isOn }) => {
         { top: "83%", left: "63%", delay: "1.6s" },
         { top: "86%", left: "48%", delay: "1.8s" },
 
-        { top: "88%", left: "18%", delay: "0s" },
-        { top: "88%", left: "79%", delay: "0.2s" },
-        { top: "95%", left: "48%", delay: "0.4s" },
-        { top: "92%", left: "31%", delay: "0.6s" },
-        { top: "92%", left: "65%", delay: "0.8s" },
+        { top: "86%", left: "18%", delay: "0s" },
+        { top: "86%", left: "79%", delay: "0.2s" },
+        { top: "92%", left: "48%", delay: "0.4s" },
+        { top: "91%", left: "31%", delay: "0.6s" },
+        { top: "91%", left: "65%", delay: "0.8s" },
     ];
 
 

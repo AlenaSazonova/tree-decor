@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { 
-    SnowfallContainer, 
-    SnowflakesContainer, 
-    Snowflake 
-} 
+import {
+    SnowfallContainer,
+    SnowflakesContainer,
+    Snowflake
+}
     from './Snowfall.style';
 
 const Snowfall = () => {

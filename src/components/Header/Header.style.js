@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
 export const HeaderContainer = styled.div`
-    margin-bottom: 50px;
-    margin-top: 30px;
-    background-color: #cbc4c4;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    background-color: #192F2D;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 `;
 
 export const Navigation = styled.nav`
@@ -14,10 +15,10 @@ export const Navigation = styled.nav`
 
 export const Button = styled.button`
     border-radius: 20px;
-    max-width: 250px;
+    min-width: 250px;
     width: 100%;
     height: 84px;
-    background: #007BFF;
+    background: #192F2D;
     font-weight: 700;
     font-size: 30px;
     line-height: 247%;
@@ -25,7 +26,6 @@ export const Button = styled.button`
     color: #fff;
     cursor: pointer;
     transition: background 0.3s;
-    margin-left: 50px;
 
     &:hover {
         background: #052d59;
@@ -46,9 +46,9 @@ export const Image = styled.img`
 export const AmountText = styled.div`
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 56%;
     transform: translate(-50%, -50%);
-    color: black;
+    color: white;
     padding: 10px 6px;
     text-align: center;
     font-size: 16px;

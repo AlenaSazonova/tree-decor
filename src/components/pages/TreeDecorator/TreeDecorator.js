@@ -1,12 +1,14 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Header from '../../Header/Header';
+import Footer from '../../Footer/Footer';
 import mute from '../../icons/svg/mute.svg';
 import snow from '../../icons/svg/snow.svg';
 import { initialState } from '../../store/reducers/GeneralReducer';
 import audioMP3 from '../../audio/audio.mp3';
-import Snowfall from '../../effects/Snowfall';
+import Snowfall from '../../effects/Snowfall/Snowfall';
 import GarlandOverlayWithLights from '../../effects/GarlandOverlayWithLights/GarlandOverlayWithLights';
+import useDragAndDrop from '../../effects/Drag&Drop/Drag&Drop';
 
 
 import {
@@ -19,6 +21,9 @@ import {
     MuteImg,
     SnowImg,
     TreeSelectionSection,
+    TitleForChoosingTree,
+    TitleForChoosingBackground,
+    TitleForChoosingGarland,
     TreeButtonImgContainer,
     TreeButton,
     TreeImg,
@@ -43,10 +48,13 @@ import {
 
     ContainerForCart,
     ContainerForBaubles,
+    TitleForBauble,
     CartItemsWrapper,
+    TitleForDecoratedTrees,
     CartItem,
     CartItemImage,
     CartItemText,
+    DecorationsContainer
 }
     from './TreeDecorator.style';
 
@@ -65,8 +73,6 @@ const TreeDecorator = () => {
     const [garlandColor, setGarlandColor] = useState(null);
 
 
-
-
     const handleThumbnailClick = (image) => {
         setSelectedImage(image);
     }
@@ -83,7 +89,6 @@ const TreeDecorator = () => {
         setShowSnow(!showSnow)
     }
 
-
     const startAudio = () => {
         audioRef.current.play();
         setAudioStatus(true);
@@ -93,6 +98,26 @@ const TreeDecorator = () => {
         audioRef.current.pause();
         setAudioStatus(false);
     }
+
+    const treeMask = [
+        // Вершина
+        { x: 345, y: 130 },
+        { x: 345, y: 170 },
+        // Верхние ветки
+        { x: 320, y: 220 }, { x: 370, y: 220 },
+        { x: 290, y: 280 }, { x: 400, y: 280 },
+        // Основание
+        { x: 260, y: 340 }, { x: 420, y: 340 },
+        { x: 240, y: 420 }, { x: 440, y: 420 },
+        // Основание
+        { x: 210, y: 500 }, { x: 475, y: 500 },
+        // Основание
+        { x: 170, y: 580 }, { x: 500, y: 580 },
+        // Низ
+        { x: 140, y: 690 }, { x: 210, y: 720 }, { x: 290, y: 740 }, { x: 360, y: 750 }, { x: 420, y: 740 }, { x: 500, y: 720 }, { x: 550, y: 690 },
+    ];
+
+    const { decorations, treeRef, handleDragStart, handleDragOver, handleDrop } = useDragAndDrop(treeMask);
 
     const buttonStyle = {
         background: isOn ? 'rgb(99 156 171)' : '#ccc',
@@ -137,7 +162,7 @@ const TreeDecorator = () => {
                     </ControlSection>
 
                     <TreeSelectionSection>
-                        <h5>Выберите елку</h5>
+                        <TitleForChoosingTree>Выберите елку</TitleForChoosingTree>
                         <TreeButtonImgContainer>
                             {tree.map((el, ind) => (
                                 <TreeButton key={ind}>
@@ -152,7 +177,7 @@ const TreeDecorator = () => {
                     </TreeSelectionSection>
 
                     <BackgroundSelectionSection>
-                        <h5>Выберите фон</h5>
+                        <TitleForChoosingBackground>Выберите фон</TitleForChoosingBackground>
                         <BackgroundButtonImgContainer>
                             {background.map((el, ind) => (
                                 <BackgroundButton key={ind}>
@@ -167,7 +192,7 @@ const TreeDecorator = () => {
                     </BackgroundSelectionSection>
 
                     <GarlandSelectionSection>
-                        <h5>Гирлянда</h5>
+                        <TitleForChoosingGarland>Гирлянда</TitleForChoosingGarland>
                         <ColorAndToggleContainer>
                             <GarlandButtonContainer>
                                 {colors.map((color, index) => (
@@ -189,38 +214,70 @@ const TreeDecorator = () => {
 
 
 
-
-
-
-
-                <ContainerForTree>
+                <ContainerForTree
+                    onDrop={handleDrop}
+                    onDragOver={handleDragOver}
+                >
                     <BackgroundImgBasic
                         src={selectedImage.src}
                         alt={selectedImage.alt}
                     />
                     <TreeImgBasic
+                        ref={treeRef}
                         src={selectedImageTree.src}
                         alt={selectedImageTree.alt}
-                        style={{
-                            
-                        }}
                     />
-                    <GarlandOverlayWithLights 
-                        color={garlandColor} 
-                        isOn={isOn} 
+                    {/* {treeMask.map((point, index) => (
+                        <div
+                            key={index}
+                            style={{
+                                position: "absolute",
+                                left: `${point.x}px`,
+                                top: `${point.y}px`,
+                                width: "10px",
+                                height: "10px",
+                                backgroundColor: "red",
+                                borderRadius: "50%",
+                                zIndex: 10,
+                            }}
+                        />
+                    ))} */}
+
+                    <DecorationsContainer ref={treeRef}>
+                        {decorations.map((decoration, index) => (
+                            <img
+                                key={index}
+                                src={decoration.src}
+                                alt="Decoration"
+                                style={{
+                                    position: "absolute",
+                                    left: `${decoration.x}px`,
+                                    top: `${decoration.y}px`,
+                                    width: "50px",
+                                }}
+                            />
+                        ))}
+                    </DecorationsContainer>
+                    <GarlandOverlayWithLights
+                        color={garlandColor}
+                        isOn={isOn}
                     />
                     {showSnow && <Snowfall />}
                 </ContainerForTree>
 
 
-
                 <ContainerForCart>
                     <ContainerForBaubles>
-                        <h5>Игрушки</h5>
+                        <TitleForBauble>Игрушки</TitleForBauble>
                         <CartItemsWrapper>
                             {favorites.map((item, index) => (
                                 <CartItem key={index}>
-                                    <CartItemImage src={item.src} alt={item.name} />
+                                    <CartItemImage
+                                        src={item.src}
+                                        alt={item.name}
+                                        draggable="true"
+                                        onDragStart={(e) => handleDragStart(e, item.src)}
+                                    />
                                     <CartItemText>{item.amount.split(": ")[1]}</CartItemText>
                                 </CartItem>
                             ))}
@@ -229,11 +286,12 @@ const TreeDecorator = () => {
 
 
                     <div>
-                        <div>Вы нарядили</div>
+                        <TitleForDecoratedTrees>Вы нарядили</TitleForDecoratedTrees>
                         <div>ImageTrees</div>
                     </div>
                 </ContainerForCart>
             </ContainerForContent>
+            <Footer />
         </Container>
     );
 };

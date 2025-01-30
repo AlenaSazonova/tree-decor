@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Header from '../../Header/Header';
+import Footer from '../../Footer/Footer';
 import BaubleCard from '../../BaubleCard/BaubleCard';
 import Filtration from '../../Filtration/Filtration';
 import { addToFavorites, removeFromFavorites } from '../../store/reducers/GeneralReducer';
@@ -139,37 +140,40 @@ const BaubleCollection = () => {
     return (
         <Container>
             <Header />
-            <Filtration 
-                onShapeFilter={handleShapeClick}
-                onColorFilter={handleColorClick}
-                onSizeFilter={handleSizeClick}
-                onAmountFilter={handleAmountFilter}
-                onYearFilter={handleYearFilter}
-                onNameFilter={handleCommonSort}
-                currentAmount={currentAmount}
-                currentYear={currentYear}
-                onFavoriteFilter={handleFavoriteFilter}
-                isFavoriteChecked={isFavoriteChecked}
-                onResetFilters={handleResetFilters}
-                selectedSize={selectedSize}
-            />
-            
-            <CardList>
-                {filteredBaubles.map((el, ind) => (
-                <BaubleCard
-                    key={ind}
-                    name={el.name}
-                    baubleImg={el.src}
-                    amount={el.amount}
-                    yearOfPurchase={el.yearOfPurchase}
-                    type={el.type}
-                    color={el.color}
-                    size={el.size}
-                    favorite={el.favorite}
-                    onFavoriteChange={updateFavoriteStatus}
+            <div>
+                <Filtration
+                    onShapeFilter={handleShapeClick}
+                    onColorFilter={handleColorClick}
+                    onSizeFilter={handleSizeClick}
+                    onAmountFilter={handleAmountFilter}
+                    onYearFilter={handleYearFilter}
+                    onNameFilter={handleCommonSort}
+                    currentAmount={currentAmount}
+                    currentYear={currentYear}
+                    onFavoriteFilter={handleFavoriteFilter}
+                    isFavoriteChecked={isFavoriteChecked}
+                    onResetFilters={handleResetFilters}
+                    selectedSize={selectedSize}
                 />
-            ))}
-            </CardList>
+
+                <CardList>
+                    {filteredBaubles.map((el, ind) => (
+                        <BaubleCard
+                            key={ind}
+                            name={el.name}
+                            baubleImg={el.src}
+                            amount={el.amount}
+                            yearOfPurchase={el.yearOfPurchase}
+                            type={el.type}
+                            color={el.color}
+                            size={el.size}
+                            favorite={el.favorite}
+                            onFavoriteChange={updateFavoriteStatus}
+                        />
+                    ))}
+                </CardList>
+            </div>
+            <Footer />
         </Container>
     );
 };

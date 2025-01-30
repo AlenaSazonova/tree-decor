@@ -3,11 +3,26 @@ import { initialState } from '../store/reducers/GeneralReducer'
 import {
     Container,
     SectionTitle,
+    ValueFilter,
+    RangeFilter,
+    SortFilter,
     ShapeFilterContainer,
+    ContainerForShapeButtonAndImg,
+    ContainerForColorButtonAndImg,
+    ShapeButton,
     ColorFilterContainer,
     SizeFilterContainer,
+    InputForCheckbox,
+    ContainerForSizeCheckbox,
     AmountFilterContainer,
+    TitleYearOfPurchase,
+    YearInput,
+    AmountTitle,
+    InputAmount,
     SortOptionsContainer,
+    SortSelect,
+    ResetContainer,
+    ResetButton,
 }
     from './Filtration.style';
 
@@ -19,59 +34,69 @@ const Filtration = ({ onShapeFilter, onColorFilter, onSizeFilter, onAmountFilter
 
     return (
         <Container>
-                <div>
-                <SectionTitle>Фильтры по значению</SectionTitle>
-                    <div>
+                
+                    <ValueFilter>
+                    <SectionTitle>Фильтры по значению</SectionTitle>
                         <ShapeFilterContainer>
                             <p>Форма:</p>
-                            {shapeFilter.map((el, ind) => (
-                                <button key={ind}>
-                                    <img src={el.src} onClick={() => onShapeFilter(el.type)} alt="shape" />
-                                </button>
-                            ))}
+                            <ContainerForShapeButtonAndImg>
+                        {shapeFilter.map((el, ind) => (
+                            <ShapeButton key={ind}>
+                                <img src={el.src} onClick={() => onShapeFilter(el.type)} alt="shape" />
+                            </ShapeButton>
+                        ))}
+                            </ContainerForShapeButtonAndImg>
+                            
                         </ShapeFilterContainer>
                         
                         <ColorFilterContainer>
                             <p>Цвет:</p>
-                            {colorFilter.map((el, ind) => (
-                                <button key={ind}>
-                                    <img src={el.src} onClick={() => onColorFilter(el.color)} alt="color" />
-                                </button>
-                            ))}
+                    <ContainerForColorButtonAndImg>
+                        {colorFilter.map((el, ind) => (
+                            <button key={ind}>
+                                <img src={el.src} onClick={() => onColorFilter(el.color)} alt="color" />
+                            </button>
+                        ))}
+                    </ContainerForColorButtonAndImg>
+                            
                         </ColorFilterContainer>
                         <SizeFilterContainer>
                             <p>Размер:</p>
-                            {sizeFilter.map((el, ind) => (
-                                <label key={ind}>
-                                    <input 
-                                        type='checkbox' 
-                                        checked={selectedSize.includes(el.label)}
-                                        onChange={() => onSizeFilter(el.label)} 
-                                    />
-                                    {el.label}
-                                </label>
-                            ))}
+                            <ContainerForSizeCheckbox>
+                        {sizeFilter.map((el, ind) => (
+                            <label key={ind}>
+                                <input
+                                    type='checkbox'
+                                    checked={selectedSize.includes(el.label)}
+                                    onChange={() => onSizeFilter(el.label)}
+                                />
+                                {el.label}
+                            </label>
+                        ))}
+                            </ContainerForSizeCheckbox>
+                            
                         </SizeFilterContainer>
                         <div>
                                 <label>
                                     Только любимые
-                                    <input 
+                                    <InputForCheckbox 
                                         type="checkbox" 
                                         checked={isFavoriteChecked}
                                         onChange={(e) => onFavoriteFilter(e.target.checked)}
                                     />
                                 </label>
                         </div>
-                    </div>
-                </div>
-                <div>
-                <SectionTitle>Фильтры по диапазону</SectionTitle>
-                    <div>
+                    </ValueFilter>
+                
+                
+                
+                    <RangeFilter>
+                    <SectionTitle>Фильтры по диапазону</SectionTitle>
                         <AmountFilterContainer>
-                            <p>Количество экземпляров:</p>
+                    <AmountTitle>Количество экземпляров:</AmountTitle>
                             <div>
                             <label htmlFor="amount">{currentAmount}</label>
-                                <input 
+                        <InputAmount 
                                     type="range"
                                     value={currentAmount}
                                     onChange={(e) => onAmountFilter(Number(e.target.value))}
@@ -82,10 +107,10 @@ const Filtration = ({ onShapeFilter, onColorFilter, onSizeFilter, onAmountFilter
                         </AmountFilterContainer>
 
                         <div>
-                            <p>Год приобретения:</p>
+                    <TitleYearOfPurchase>Год приобретения:</TitleYearOfPurchase>
                             <div>
                             <label htmlFor="year">{currentYear}</label>
-                                <input 
+                                <YearInput 
                                     type="range"
                                     value={currentYear}
                                     onChange={(e) => onYearFilter(Number(e.target.value))} 
@@ -96,23 +121,24 @@ const Filtration = ({ onShapeFilter, onColorFilter, onSizeFilter, onAmountFilter
                                 <label htmlFor="year">2020</label>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div>
-                <SectionTitle>Сортировка</SectionTitle>
-                    <div>
+                    </RangeFilter>
+                
+                
+                
+                <SortFilter>
+                    <SectionTitle>Сортировка</SectionTitle>
                     <SortOptionsContainer>
-                        <select onChange={onNameFilter}>
+                        <SortSelect onChange={onNameFilter}>
                             <option value="name">По названию от "А" до "Я"</option>
                             <option value="year">По году от 1940 до 2020</option>
-                        </select>
+                        </SortSelect>
                     </SortOptionsContainer>
-                        <div>
-                            <button onClick={() => onResetFilters()}>Сброс фильтров</button>
-                        </div>
+                        <ResetContainer>
+                            <ResetButton onClick={() => onResetFilters()}>Сброс фильтров</ResetButton>
+                        </ResetContainer>
                         
-                    </div>
-                </div>
+                </SortFilter>
+                
         </Container>
     );
 };

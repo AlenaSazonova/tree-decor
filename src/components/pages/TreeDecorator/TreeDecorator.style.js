@@ -1,13 +1,16 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    
+    width: 100%;
 `;
 
 export const ContainerForContent = styled.div`
+    width: 100%;
     display: flex;
     justify-content: center;
-    margin: 0 50px;
+    padding: 0 80px;
+    background-color: #192F2D;
+    color: white;
 `;
 
 export const DecoratorWrapper = styled.div`
@@ -15,28 +18,49 @@ export const DecoratorWrapper = styled.div`
 `;
 
 export const ControlSection = styled.div`
-    margin-bottom: 51px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 10px;
 `;
 
 export const ButtonMuteImg = styled.button`
-    margin-right: 40px;
 `;
 
 export const ButtonSnowImg = styled.button`
 `;
 
 export const MuteImg = styled.img`
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
 `;
 
 export const SnowImg = styled.img`
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
 `;
 
 export const TreeSelectionSection = styled.div`
-    margin-bottom: 36px;
+    margin-bottom: 25px;
+`;
+
+export const TitleForChoosingTree = styled.h5`
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 10px;
+`;
+
+export const TitleForChoosingBackground = styled.h5`
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 10px;
+`;
+
+export const TitleForChoosingGarland = styled.h5`
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 10px;
 `;
 
 export const TreeButtonImgContainer = styled.div`
@@ -57,7 +81,7 @@ export const TreeButton = styled.button`
 `;
 
 export const BackgroundSelectionSection = styled.div`
-    margin-bottom: 36px;
+    margin-bottom: 25px;
 `;
 
 export const BackgroundButtonImgContainer = styled.div`
@@ -77,7 +101,7 @@ export const BackgroundImg = styled.img`
 `;
 
 export const GarlandSelectionSection = styled.div`
-    margin-bottom: 36px;
+    margin-bottom: 25px;
 `;
 
 export const ColorAndToggleContainer = styled.div`
@@ -110,6 +134,9 @@ export const ButtonColor = styled.button`
 `;
 
 export const ButtonSection = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 `;
 
 export const ToggleButton = styled.button`
@@ -165,7 +192,6 @@ export const SaveButton = styled.button`
     color: #fff;
     cursor: pointer;
     transition: background 0.3s;
-    margin-left: 50px;
 
     &:hover {
         background: #4b8b3a;
@@ -185,7 +211,6 @@ export const ResetButton = styled.button`
     color: #fff;
     cursor: pointer;
     transition: background 0.3s;
-    margin-left: 50px;
 
     &:hover {
         background: #4b8b3a;
@@ -195,25 +220,23 @@ export const ResetButton = styled.button`
 
 export const ContainerForTree = styled.div`
     position: relative;
-    margin-right: 50px;
-    margin-left: 50px;
+    margin-right: 20px;
+    margin-left: 20px;
 `;
 
 export const BackgroundImgBasic = styled.img`
     max-width: 700px;
-    height: 860px;
+    min-height: 860px;
 `;
 
 export const TreeImgBasic = styled.img`
     position: absolute;
-    top: 58%;
+    top: 56%;
     left: 50%;
     transform: translate(-50%, -50%);
-    max-width: 100%;
-    max-height: 100%;
+    min-width: 500px;
+    min-height: 660px;
 `;
-
-
 
 export const ContainerForCart = styled.div`
     flex: 0 0 20%;
@@ -222,7 +245,20 @@ export const ContainerForCart = styled.div`
 export const ContainerForBaubles = styled.div`
     display: flex;
     flex-direction: column;
-    min-height: 500px;
+    min-height: 510px;
+`;
+
+export const TitleForBauble = styled.h5`
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+`;
+
+export const TitleForDecoratedTrees = styled.h5`
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 10px;
 `;
 
 export const CartItemsWrapper = styled.div`
@@ -251,6 +287,9 @@ export const CartItem = styled.div`
 
 export const CartItemImage = styled.img`
     height: 60px;
+    position: absolute; 
+    cursor: grab;       
+    user-select: none;
 `;
 
 export const CartItemText = styled.p`
@@ -266,4 +305,14 @@ export const CartItemText = styled.p`
     position: absolute;
     bottom: 1px;
     right: 1px;
+`;
+
+export const DecorationsContainer = styled.div`
+    position: absolute;
+    top: 56%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 660px;
+    pointer-events: none;
 `;

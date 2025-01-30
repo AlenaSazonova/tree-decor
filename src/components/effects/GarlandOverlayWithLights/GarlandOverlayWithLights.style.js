@@ -11,8 +11,8 @@ export const blink = keyframes`
 
 export const GarlandLight = styled.div`
     position: absolute;
-    width: 18px;
-    height: 18px;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
     background: ${({ color }) => color || "red"};
     animation: ${blink} 1s infinite;

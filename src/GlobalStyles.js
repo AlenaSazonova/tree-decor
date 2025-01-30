@@ -10,10 +10,9 @@ const GlobalStyle = createGlobalStyle`
 
 *,
 *:before,
-*:after {/*
+*:after {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    */
 }
 
 :focus,
@@ -92,21 +91,25 @@ h1, h2, h3, h4, h5, h6 {
 /*--------------------*/
 
 body {
+    width: 100%;
     height: 100%;
     font-weight: 600;
-    max-width: 1600px;
-    margin: 0 auto;
     box-sizing: border-box;
     overflow-x: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 .wrapper {
-    width: 100%;
     min-height: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
     overflow: hidden;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    flex-direction: column;
+    padding: 0 15px;
     /*padding: 0 15px;*/
         /*прижать подвал*/
         -webkit-box-orient: vertical;
@@ -118,6 +121,22 @@ body {
         -webkit-box-sizing: content-box;
             box-sizing: content-box;
 }
+
+@media (max-width: 1920px) {
+      .wrapper {
+          max-width: 100%;
+      }
+  }
+
+  @media (max-width: 768px) {
+      .wrapper {
+          padding: 0 10px; /* Уменьшаем отступы для маленьких экранов */
+      }
+  }
+
+//   * {
+//     outline: 1px solid red; /* Показать границы всех элементов */
+// }
 `;
 
 export default GlobalStyle;

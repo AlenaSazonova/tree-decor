@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 
 export const Container = styled.div`
-    padding-left: 50px;
-    padding-right: 50px;
+    
 `;
 
 export const CardList = styled.div`
@@ -11,6 +10,9 @@ export const CardList = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    background-color: #192F2D;
+    color: white;
+    gap: 20px;
 `;
 
 

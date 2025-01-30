@@ -3,7 +3,8 @@ import styled from "styled-components";
 
 export const CardContainer = styled.div`
     border: 2px solid #ddd;
-    margin: 20px;
+    width: 330px;
+    background: radial-gradient(circle, #B3F6FF80 0%, #1A596680 100%);
 `;
 
 export const CardHeader = styled.div`
@@ -18,7 +19,7 @@ export const ContentSection = styled.div`
 export const CardImageWrapper = styled.div`
     display: flex;
     flex-direction: column;
-    margin-right: 10px;
+    margin-right: 20px;
 `;
 
 export const CardImage = styled.img`

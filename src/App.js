@@ -11,6 +11,7 @@ function App() {
     return (
         <>
             <GlobalStyle />
+            <div className='wrapper'>
             <Router>
                 <Routes>
                     <Route path="/" element={<HomePage />} />
@@ -18,6 +19,7 @@ function App() {
                     <Route path="/TreeDecorator" element={<TreeDecorator />} />
                 </Routes>
             </Router>
+            </div>
         </>
     );
 }
