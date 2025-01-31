@@ -2,6 +2,7 @@ import React from 'react';
 
 import {
     FooterContainer,
+    Year,
 }
     from './Footer.style';
 
@@ -10,7 +11,7 @@ const Footer = () => {
 
     return (
         <FooterContainer>
-            2025
+            <Year>2025</Year>
         </FooterContainer>
     )
 };
