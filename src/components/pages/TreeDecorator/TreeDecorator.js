@@ -1,10 +1,11 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import html2canvas from "html2canvas";
 import Header from '../../Header/Header';
 import Footer from '../../Footer/Footer';
 import mute from '../../icons/svg/mute.svg';
 import snow from '../../icons/svg/snow.svg';
-import { initialState } from '../../store/reducers/GeneralReducer';
+import { initialState, saveTree } from '../../store/reducers/GeneralReducer';
 import audioMP3 from '../../audio/audio.mp3';
 import Snowfall from '../../effects/Snowfall/Snowfall';
 import GarlandOverlayWithLights from '../../effects/GarlandOverlayWithLights/GarlandOverlayWithLights';
@@ -50,15 +51,21 @@ import {
     ContainerForBaubles,
     TitleForBauble,
     CartItemsWrapper,
-    TitleForDecoratedTrees,
     CartItem,
     CartItemImage,
     CartItemText,
-    DecorationsContainer
+    DecorationsContainer,
+
+    DecoratedTreesWrapper,
+    TitleForDecoratedTrees,
+    SavedTreesContainer,
+    SavedTreeImage
 }
     from './TreeDecorator.style';
 
 const TreeDecorator = () => {
+    const dispatch = useDispatch();
+    const savedTrees = useSelector(state => state.baubles.savedTrees);
     const favorites = useSelector(state => state.baubles.favorites);
     const tree = initialState.tree;
     const background = initialState.background;
@@ -71,7 +78,20 @@ const TreeDecorator = () => {
     const [selectedImageTree, setSelectedImageTree] = useState(tree[0]);
     const [isOn, setIsOn] = useState(false);
     const [garlandColor, setGarlandColor] = useState(null);
+    const containerRef = useRef(null);
 
+    const handleSave = async () => {
+        if (!containerRef.current) return;
+
+        try {
+            const canvas = await html2canvas(containerRef.current, { backgroundColor: null });
+            const image = canvas.toDataURL("image/png");
+
+            dispatch(saveTree(image));
+        } catch (error) {
+            console.error("Ошибка при сохранении изображения:", error);
+        }
+    };
 
     const handleThumbnailClick = (image) => {
         setSelectedImage(image);
@@ -207,7 +227,7 @@ const TreeDecorator = () => {
                     </GarlandSelectionSection>
 
                     <ButtonSection>
-                        <SaveButton>Сохранить</SaveButton>
+                        <SaveButton onClick={handleSave}>Сохранить</SaveButton>
                         <ResetButton>Сбросить</ResetButton>
                     </ButtonSection>
                 </DecoratorWrapper>
@@ -215,6 +235,7 @@ const TreeDecorator = () => {
 
 
                 <ContainerForTree
+                    ref={containerRef}
                     onDrop={handleDrop}
                     onDragOver={handleDragOver}
                 >
@@ -285,10 +306,14 @@ const TreeDecorator = () => {
                     </ContainerForBaubles>
 
 
-                    <div>
+                    <DecoratedTreesWrapper>
                         <TitleForDecoratedTrees>Вы нарядили</TitleForDecoratedTrees>
-                        <div>ImageTrees</div>
-                    </div>
+                        <SavedTreesContainer>
+                            {savedTrees.map((tree, index) => (
+                                <SavedTreeImage key={index} src={tree} alt="Decorated tree" />
+                            ))}
+                        </SavedTreesContainer>
+                    </DecoratedTreesWrapper>
                 </ContainerForCart>
             </ContainerForContent>
             <Footer />

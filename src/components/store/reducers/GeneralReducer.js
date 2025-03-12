@@ -89,6 +89,8 @@ export const initialState = {
 
     favoriteCount: 0,
 
+    savedTrees: [],
+
     tree: [
         { src: tree1 },
         { src: tree2 },
@@ -115,20 +117,20 @@ export const initialState = {
 
     filter: [{
         shape: [
-            { src: ball, type: 'Форма: шар'},
-            { src: bell, type: 'Форма: колокол'},
-            { src: figurine, type: 'Форма: фигурка'},
-            { src: pine, type: 'Форма: шишка'},
-            { src: snowflake, type: 'Форма: снежинка'},
-            { src: star, type: 'Форма: звезда'},
+            { src: ball, type: 'Форма: шар' },
+            { src: bell, type: 'Форма: колокол' },
+            { src: figurine, type: 'Форма: фигурка' },
+            { src: pine, type: 'Форма: шишка' },
+            { src: snowflake, type: 'Форма: снежинка' },
+            { src: star, type: 'Форма: звезда' },
         ],
 
         colors: [
-            { src: white, color: 'Цвет: белый'},
-            { src: blue, color: 'Цвет: синий'},
-            { src: green, color: 'Цвет: зеленый'},
-            { src: red, color: 'Цвет: красный'},
-            { src: yellow, color: 'Цвет: желтый'},
+            { src: white, color: 'Цвет: белый' },
+            { src: blue, color: 'Цвет: синий' },
+            { src: green, color: 'Цвет: зеленый' },
+            { src: red, color: 'Цвет: красный' },
+            { src: yellow, color: 'Цвет: желтый' },
         ],
 
         size: [
@@ -161,9 +163,15 @@ const baublesSlice = createSlice({
                 item.favorite = 'Любимая: нет';
                 state.favoriteCount -= 1
             }
-        }
+        },
+        saveTree: (state, action) => {
+            const newTree = action.payload;
+            if (!state.savedTrees.includes(newTree)) {
+                state.savedTrees.push(newTree)
+            }
+        },
     },
 });
 
-export const { addToFavorites, removeFromFavorites } = baublesSlice.actions;
+export const { addToFavorites, removeFromFavorites, saveTree, removeTree } = baublesSlice.actions;
 export default baublesSlice.reducer;

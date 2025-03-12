@@ -18,7 +18,7 @@ export const DecoratorWrapper = styled.div`
 `;
 
 export const ControlSection = styled.div`
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -42,25 +42,25 @@ export const SnowImg = styled.img`
 `;
 
 export const TreeSelectionSection = styled.div`
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 `;
 
 export const TitleForChoosingTree = styled.h5`
     font-size: 30px;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 25px;
 `;
 
 export const TitleForChoosingBackground = styled.h5`
     font-size: 30px;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 25px;
 `;
 
 export const TitleForChoosingGarland = styled.h5`
     font-size: 30px;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 25px;
 `;
 
 export const TreeButtonImgContainer = styled.div`
@@ -78,30 +78,32 @@ export const TreeImg = styled.img`
 export const TreeButton = styled.button`
     width: calc(33.33% - 10.66px);
     max-width: 134px;
+    background: radial-gradient(109.56% 109.56% at 0% -2.94%, rgba(255, 255, 255, 0.5) 0%, rgba(179, 246, 255, 0.5) 100%);
 `;
 
 export const BackgroundSelectionSection = styled.div`
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 `;
 
 export const BackgroundButtonImgContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 16px;
+    justify-content: center;
+    align-items: center;
 `;
 
 export const BackgroundButton = styled.button`
-    
+    margin-right: 5px;
+    margin-bottom: 5px;
 `;
 
 export const BackgroundImg = styled.img`
-    max-width: 68px;
-    height: 68px;
+    max-width: 62px;
+    height: 62px;
 `;
 
 export const GarlandSelectionSection = styled.div`
-    margin-bottom: 25px;
+    margin-bottom: 50px;
 `;
 
 export const ColorAndToggleContainer = styled.div`
@@ -246,19 +248,20 @@ export const ContainerForBaubles = styled.div`
     display: flex;
     flex-direction: column;
     min-height: 510px;
+    margin-bottom: 50px;
 `;
 
 export const TitleForBauble = styled.h5`
     font-size: 30px;
     text-align: center;
-    margin-bottom: 10px;
-    margin-top: 10px;
+    margin-bottom: 50px;
+    margin-top: 15px;
 `;
 
 export const TitleForDecoratedTrees = styled.h5`
     font-size: 30px;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 40px;
 `;
 
 export const CartItemsWrapper = styled.div`
@@ -315,4 +318,41 @@ export const DecorationsContainer = styled.div`
     width: 500px;
     height: 660px;
     pointer-events: none;
+`;
+
+export const DecoratedTreesWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+`;
+
+export const SavedTreesContainer = styled.div`
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    gap: 10px;
+    padding-bottom: 15px;
+    width: 100%;
+    max-width: 270px;
+    border-radius: 10px;
+
+    &::-webkit-scrollbar {
+        height: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+`;
+
+export const SavedTreeImage = styled.img`
+    width: 150px;
+    height: 170px;
+    border-radius: 5px;
 `;
