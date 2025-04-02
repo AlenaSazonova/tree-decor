@@ -1,6 +1,6 @@
-// @ts-ignore
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
 import { Link } from 'react-router-dom';
 import ball from '../icons/svg/ball-2.svg';
 
@@ -15,8 +15,8 @@ import {
 }
     from './Header.style';
 
-const Header = () => {
-    const favoriteCount = useSelector((state) => state.baubles.favoriteCount);
+const Header: React.FC = () => {
+    const favoriteCount = useSelector((state: RootState) => state.baubles.favoriteCount);
 
     return (
     <HeaderContainer>

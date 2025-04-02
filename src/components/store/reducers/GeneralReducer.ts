@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 
 import bauble1 from '../../icons/bauble/1.png';
@@ -57,11 +57,59 @@ import red from '../../icons/colour/red.png';
 import yellow from '../../icons/colour/yellow.png';
 
 
+interface Bauble {
+    src: string;
+    name: string;
+    amount: string;
+    yearOfPurchase: string;
+    type: string;
+    color: string;
+    size: string;
+    favorite: string;
+}
+
+interface Tree {
+    src: string;
+}
+
+interface Background {
+    src: string;
+}
+
+interface ShapeFilter {
+    src: string;
+    type: string;
+}
+
+interface ColorFilter {
+    src: string;
+    color: string;
+}
+
+interface SizeFilter {
+    id: number;
+    label: string;
+}
+
+interface Filter {
+    shape: ShapeFilter[];
+    colors: ColorFilter[];
+    size: SizeFilter[];
+}
 
 
+interface BaublesState {
+    bauble: Bauble[];
+    favorites: Bauble[];
+    favoriteCount: number;
+    savedTrees: Tree[];
+    tree: Tree[];
+    background: Background[];
+    filter: Filter;
+}
 
-export const initialState = {
 
+export const initialState: BaublesState = {
     bauble: [
         { src: bauble1, name: 'Большой шар с рисунком', amount: 'Количество: 5', yearOfPurchase: 'Год покупки: 1960', type: 'Форма: шар', color: 'Цвет: желтый', size: 'Размер: большой', favorite: 'Любимая: нет' },
         { src: bauble2, name: 'Зеленый шар с цветами', amount: 'Количество: 5', yearOfPurchase: 'Год покупки: 2000', type: 'Форма: шар', color: 'Цвет: зеленый', size: 'Размер: большой', favorite: 'Любимая: нет' },
@@ -115,7 +163,7 @@ export const initialState = {
 
 
 
-    filter: [{
+    filter: {
         shape: [
             { src: ball, type: 'Форма: шар' },
             { src: bell, type: 'Форма: колокол' },
@@ -139,7 +187,7 @@ export const initialState = {
             { id: 1, label: 'Размер: маленький' },
         ],
 
-    }],
+    },
 
 }
 
@@ -148,7 +196,7 @@ const baublesSlice = createSlice({
     name: 'baubles',
     initialState,
     reducers: {
-        addToFavorites: (state, action) => {
+        addToFavorites: (state, action: PayloadAction<Bauble>) => {
             const item = state.bauble.find(bauble => bauble.src === action.payload.src);
             if (item && !state.favorites.includes(item)) {
                 state.favorites.push(item);
@@ -156,7 +204,7 @@ const baublesSlice = createSlice({
                 state.favoriteCount += 1
             }
         },
-        removeFromFavorites: (state, action) => {
+        removeFromFavorites: (state, action: PayloadAction<Bauble>) => {
             state.favorites = state.favorites.filter(el => el.src !== action.payload.src);
             const item = state.bauble.find(bauble => bauble.src === action.payload.src);
             if (item) {
@@ -164,7 +212,7 @@ const baublesSlice = createSlice({
                 state.favoriteCount -= 1
             }
         },
-        saveTree: (state, action) => {
+        saveTree: (state, action: PayloadAction<Tree>) => {
             const newTree = action.payload;
             if (!state.savedTrees.includes(newTree)) {
                 state.savedTrees.push(newTree)
@@ -173,5 +221,5 @@ const baublesSlice = createSlice({
     },
 });
 
-export const { addToFavorites, removeFromFavorites, saveTree, removeTree } = baublesSlice.actions;
+export const { addToFavorites, removeFromFavorites, saveTree } = baublesSlice.actions;
 export default baublesSlice.reducer;

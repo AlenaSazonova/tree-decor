@@ -1,4 +1,3 @@
-// @ts-ignore
 import React from 'react';
 
 import {
@@ -8,7 +7,7 @@ import {
     from './Footer.style';
 
 
-const Footer = () => {
+const Footer: React.FC = () => {
 
     return (
         <FooterContainer>
