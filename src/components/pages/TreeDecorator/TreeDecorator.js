@@ -1,3 +1,4 @@
+// @ts-ignore
 import React, { useRef, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import html2canvas from "html2canvas";

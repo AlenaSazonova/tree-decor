@@ -1,3 +1,4 @@
+// @ts-ignore
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Header from '../../Header/Header';

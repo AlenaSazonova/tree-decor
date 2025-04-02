@@ -4,13 +4,11 @@ import styled from "styled-components";
 export const Container = styled.div`
     display: flex;
     background-color: #192F2D;
-    justify-content: space-between;
+    justify-content: center;    
     color: white;
     flex-wrap: wrap;
     width: 100%;
-    padding-bottom: 30px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 30px 20px;
 `;
 
 export const SectionTitle = styled.h4`
@@ -25,7 +23,7 @@ export const ValueFilter = styled.div`
     width: 100%;
     max-width: 430px;
     padding: 20px;
-
+    margin-bottom: 10px;
 `;
 
 export const RangeFilter = styled.div`
@@ -38,6 +36,9 @@ export const RangeFilter = styled.div`
     flex-direction: column;
     justify-content: flex-start;    
     align-items: center;
+    margin-bottom: 10px;
+    margin-right: 20px;
+    margin-left: 20px;
 `;
 
 export const SortFilter = styled.div`
@@ -49,7 +50,7 @@ export const SortFilter = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    margin-bottom: 10px;
 `;
 
 export const ShapeFilterContainer = styled.div`
@@ -108,7 +109,7 @@ export const YearInput = styled.input`
 export const SortOptionsContainer = styled.div`
     display: flex;
     justify-content: center;
-    margin-top: -80px;
+    margin-bottom: 90px;
 `;
 
 
@@ -128,7 +129,6 @@ export const ResetContainer = styled.div`
 `;
 
 export const ResetButton = styled.button`
-    font-size: 25px;
     background: radial-gradient(circle, #B3F6FF80 0%, #1A596680 100%);
     border: 1px solid #24C5DB;
     border-radius: 10px;

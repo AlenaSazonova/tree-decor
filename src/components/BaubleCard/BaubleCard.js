@@ -1,3 +1,4 @@
+// @ts-ignore
 import React, { useState } from 'react';
 import favoriteImg from '../icons/favourite/Screenshot 2024-11-26 at 14.24.52.png';
 import { useDispatch } from 'react-redux';

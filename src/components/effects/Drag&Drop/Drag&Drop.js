@@ -1,3 +1,4 @@
+// @ts-ignore
 import { useRef, useState } from 'react';
 import { 
     

@@ -1,3 +1,4 @@
+import React from "react"; 
 import './App.css';
 import GlobalStyle from './GlobalStyles';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -7,7 +8,7 @@ import TreeDecorator from './components/pages/TreeDecorator/TreeDecorator';
 
 
 
-function App() {
+const App: React.FC = () => {
     return (
         <>
             <GlobalStyle />
