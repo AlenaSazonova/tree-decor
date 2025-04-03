@@ -1,28 +1,37 @@
-// @ts-ignore
 import { useRef, useState } from 'react';
-import { 
-    
-} 
-    from './Drag&Drop.style';
 
-const useDragAndDrop = (treeMask) => {
-    const [decorations, setDecorations] = useState([]);
-    const treeRef = useRef(null);
+interface Decoration {
+    src: string;
+    x: number;
+    y: number;
+}
 
-    const handleDragStart = (e, src) => {
+interface Point {
+    x: number;
+    y: number;
+}
+
+const useDragAndDrop = (treeMask: Point[]) => {
+    const [decorations, setDecorations] = useState<Decoration[]>([]);
+    const treeRef = useRef<HTMLDivElement | null>(null);
+
+    const handleDragStart = (e: React.DragEvent<HTMLImageElement>, src: string) => {
         e.dataTransfer.setData('src', src);
     };
 
-    const handleDragOver = (e) => {
+    const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
     };
 
-    const handleDrop = (e) => {
+    const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
         e.preventDefault();
         const src = e.dataTransfer.getData('src');
-        if (!treeRef.current) return;
+        if (!treeRef.current || !src) return;
 
-        const treeRect = treeRef.current.getBoundingClientRect();
+        const treeElement = treeRef.current;
+        if (!treeElement) return;
+
+        const treeRect = treeElement.getBoundingClientRect();
         const decorationSize = 50;
 
         let x = e.clientX - treeRect.left - decorationSize / 2;
@@ -33,7 +42,7 @@ const useDragAndDrop = (treeMask) => {
             y: point.y - 130
         }));
 
-        const isWithinTreeOrContour = (x, y) => {
+        const isWithinTreeOrContour = (x: number, y: number) => {
             return shiftedTreeMask.some((point, index) => {
                 const nextPoint = shiftedTreeMask[index + 1] || shiftedTreeMask[0];
                 const distanceToLine = distanceToSegment(x, y, point.x, point.y, nextPoint.x, nextPoint.y);
@@ -44,13 +53,13 @@ const useDragAndDrop = (treeMask) => {
         };
 
         if (isWithinTreeOrContour(x, y)) {
-            setDecorations((prev) => [...prev, { src, x, y }]);
+            setDecorations((prev: Decoration[]) => [...prev, { src, x, y }]);
         } else {
             console.log("Decoration dropped outside tree mask or contour");
         }
     };
 
-    const distanceToSegment = (px, py, x1, y1, x2, y2) => {
+    const distanceToSegment = (px: number, py: number, x1: number, y1: number, x2: number, y2: number) => {
         const lineLength = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
         if (lineLength === 0) return Math.sqrt((px - x1) ** 2 + (py - y1) ** 2);
 
