@@ -1,8 +1,7 @@
-// @ts-ignore
 import React, { useState } from 'react';
 import favoriteImg from '../icons/favourite/Screenshot 2024-11-26 at 14.24.52.png';
 import { useDispatch } from 'react-redux';
-import { addToFavorites, removeFromFavorites } from '../store/reducers/GeneralReducer';
+import { addToFavorites, removeFromFavorites, Bauble } from '../store/reducers/GeneralReducer';
 
 import {
     CardContainer, 
@@ -18,7 +17,20 @@ import {
     from './BaubleCard.style';
 
 
-const BaubleCard = ({ 
+interface BaubleCardProps {
+    name: string;
+    baubleImg: string;
+    amount: number;
+    yearOfPurchase: number;
+    type: string;
+    color: string;
+    size: string;
+    favorite: string;
+    onFavoriteChange: (name: string, isFavorite: boolean) => void;
+}
+
+
+const BaubleCard: React.FC<BaubleCardProps> = ({ 
         name, 
         baubleImg, 
         amount, 
@@ -31,17 +43,28 @@ const BaubleCard = ({
     }) => {
 
     const dispatch = useDispatch(); 
-    const [isFavorite, setIsFavorite] = useState(favorite === "Любимая: да");
+    const [isFavorite, setIsFavorite] = useState<boolean>(favorite === "Любимая: да");
 
 
     const handleFavoriteToggle = () => {
         const newFavoriteStatus = !isFavorite;
         setIsFavorite(newFavoriteStatus);
 
+        const bauble: Bauble = {
+            name,
+            src: baubleImg,
+            amount: amount.toString(),
+            yearOfPurchase: yearOfPurchase.toString(),
+            type,
+            color,
+            size,
+            favorite: newFavoriteStatus ? "Любимая: да" : "Любимая: нет"
+        };
+
         if (newFavoriteStatus) {
-            dispatch(addToFavorites({ src: baubleImg, amount }));
+            dispatch(addToFavorites(bauble));
         } else {
-            dispatch(removeFromFavorites({ src: baubleImg, amount }));
+            dispatch(removeFromFavorites(bauble));
         }
         onFavoriteChange(name, newFavoriteStatus);    };
     

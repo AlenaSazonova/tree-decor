@@ -57,7 +57,7 @@ import red from '../../icons/colour/red.png';
 import yellow from '../../icons/colour/yellow.png';
 
 
-interface Bauble {
+export interface Bauble {
     src: string;
     name: string;
     amount: string;
