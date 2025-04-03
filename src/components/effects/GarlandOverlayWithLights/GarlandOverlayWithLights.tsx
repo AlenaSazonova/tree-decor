@@ -1,4 +1,3 @@
-// @ts-ignore
 import React from "react";
 import {
     GarlandLight,
@@ -7,8 +6,13 @@ import {
     from './GarlandOverlayWithLights.style';
 
 
-const GarlandOverlayWithLights = ({ color = "red", isOn }) => {
-    const lights = [
+interface GarlandOverlayWithLightsProps {
+    color?: string;
+    isOn: boolean;
+}
+
+const GarlandOverlayWithLights: React.FC<GarlandOverlayWithLightsProps> = ({ color = "red", isOn }) => {
+    const lights: { top: string; left: string; delay: string }[] = [
         { top: "19%", left: "49%", delay: "0s" },
         // Уровень 1
         { top: "25%", left: "46%", delay: "0.2s" },

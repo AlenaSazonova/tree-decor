@@ -9,7 +9,7 @@ export const blink = keyframes`
     }
 `;
 
-export const GarlandLight = styled.div`
+export const GarlandLight = styled.div<{ $delay: string }>`
     position: absolute;
     width: 9px;
     height: 9px;
