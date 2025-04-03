@@ -1,4 +1,3 @@
-// @ts-ignore
 import React, { useEffect, useState } from 'react';
 import {
     SnowfallContainer,
@@ -7,12 +6,19 @@ import {
 }
     from './Snowfall.style';
 
+interface SnowflakeType {
+    id: number;
+    left: number;
+    delay: number;
+    duration: number;
+}
+
 const Snowfall = () => {
-    const [snowflakes, setSnowflakes] = useState([]);
+    const [snowflakes, setSnowflakes] = useState<SnowflakeType[]>([]);
 
     useEffect(() => {
         const numberOfSnowflakes = 100;
-        const newSnowflakes = [];
+        const newSnowflakes: SnowflakeType[] = [];
 
         for (let i = 0; i < numberOfSnowflakes; i++) {
             newSnowflakes.push({
