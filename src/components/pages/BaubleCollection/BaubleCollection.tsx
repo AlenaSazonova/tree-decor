@@ -1,11 +1,11 @@
-// @ts-ignore
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Header from '../../Header/Header';
 import Footer from '../../Footer/Footer';
 import BaubleCard from '../../BaubleCard/BaubleCard';
 import Filtration from '../../Filtration/Filtration';
-import { addToFavorites, removeFromFavorites } from '../../store/reducers/GeneralReducer';
+import { addToFavorites, removeFromFavorites, Bauble } from '../../store/reducers/GeneralReducer';
+
 
 import {
     Container,
@@ -15,42 +15,42 @@ import {
 
 const BaubleCollection = () => {
     const dispatch = useDispatch();
-    const bauble = useSelector((state) => state.baubles.bauble) ;
-    const favorites = useSelector((state) => state.baubles.favorites);
-    const [filteredBaubles, setFilteredBaubles] = useState(bauble);
-    const [selectedSize, setSelectedSize] = useState([]);
-    const [currentAmount, setCurrentAmount] = useState(1);
-    const [currentYear, setCurrentYear] = useState(1940);
-    const [isFavoriteChecked, setIsFavoriteChecked] = useState(false);
+    const bauble = useSelector((state: any) => state.baubles.bauble) ;
+    const favorites = useSelector((state: any) => state.baubles.favorites);
+    const [filteredBaubles, setFilteredBaubles] = useState<Bauble[]>(bauble);
+    const [selectedSize, setSelectedSize] = useState < string[]>([]);
+    const [currentAmount, setCurrentAmount] = useState<number>(1);
+    const [currentYear, setCurrentYear] = useState<number>(1940);
+    const [isFavoriteChecked, setIsFavoriteChecked] = useState<boolean>(false);
 
 
-    const handleShapeClick = (type) => {
-        const filtered = bauble.filter((el) => el.type === type);
+    const handleShapeClick = (type: string) => {
+        const filtered = bauble.filter((el: Bauble) => el.type === type);
         setFilteredBaubles(filtered);
     };
 
 
-    const handleColorClick = (color) => {
-        const filtered = bauble.filter((el) => el.color === color);
+    const handleColorClick = (color: string) => {
+        const filtered = bauble.filter((el: Bauble) => el.color === color);
         setFilteredBaubles(filtered);
     };
 
-    const handleSizeClick = (size) => {
+    const handleSizeClick = (size: string) => {
         if (selectedSize.includes(size)) {
             setSelectedSize([]);
             setFilteredBaubles(bauble);
         } else {
             setSelectedSize([size]);
-            const filtered = bauble.filter((el) => el.size === size);
+            const filtered = bauble.filter((el: Bauble) => el.size === size);
             setFilteredBaubles(filtered);
         }
     };
 
 
-    const handleAmountFilter = (value) => {
+    const handleAmountFilter = (value: number) => {
         setCurrentAmount(value)
-        const filtered = bauble.filter((el) => {
-            const amount = parseInt(el.amount.match(/\d+/)[0], 10);
+        const filtered = bauble.filter((el: Bauble) => {
+            const amount = parseInt(el.amount, 10);
             return amount === value;
         });
 
@@ -58,10 +58,10 @@ const BaubleCollection = () => {
     };
 
 
-    const handleYearFilter = (value) => {
+    const handleYearFilter = (value: number) => {
         setCurrentYear(value);
-        const filtered = bauble.filter((el) => {
-            const yearOfPurchase = parseInt(el.yearOfPurchase.match(/\d+/)[0], 10);
+        const filtered = bauble.filter((el: Bauble) => {
+            const yearOfPurchase = parseInt(el.yearOfPurchase, 10);
             return yearOfPurchase === value;
         });
 
@@ -96,9 +96,9 @@ const BaubleCollection = () => {
     }
 
 
-    const handleCommonSort = (e) => {
+    const handleCommonSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const selectOptions = e.target.value;
-        let sortedBaubles;
+        let sortedBaubles: Bauble[] | undefined;
 
         if (selectOptions === 'name') {
             sortedBaubles = handleNameSortAscending()
@@ -106,11 +106,13 @@ const BaubleCollection = () => {
             sortedBaubles = handleYearSort()
         }
 
-        setFilteredBaubles(sortedBaubles);
+        if (sortedBaubles) {
+            setFilteredBaubles(sortedBaubles);
+        }
     }
 
 
-    const handleFavoriteFilter = (isChecked) => {
+    const handleFavoriteFilter = (isChecked: boolean) => {
         setIsFavoriteChecked(isChecked);
         if (isChecked) {
             setFilteredBaubles(favorites);
@@ -120,13 +122,19 @@ const BaubleCollection = () => {
     }
 
 
-    const updateFavoriteStatus = (name, isFavorite) => {
-        if (isFavorite) {
-            dispatch(addToFavorites({ name }))
-        } else {
-            dispatch(removeFromFavorites({ name }))
+    const updateFavoriteStatus = (name: string, isFavorite: boolean) => {
+        if (!bauble) return;
+
+        const item = bauble.find((el: Bauble) => el.name === name);
+        if (item) {
+            if (isFavorite) {
+                dispatch(addToFavorites(item));
+            } else {
+                dispatch(removeFromFavorites(item));
+            }
         }
     }
+
 
 
     const handleResetFilters = () => {

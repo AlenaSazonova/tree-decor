@@ -20,8 +20,8 @@ import {
 interface BaubleCardProps {
     name: string;
     baubleImg: string;
-    amount: number;
-    yearOfPurchase: number;
+    amount: string;
+    yearOfPurchase: string;
     type: string;
     color: string;
     size: string;
@@ -53,8 +53,8 @@ const BaubleCard: React.FC<BaubleCardProps> = ({
         const bauble: Bauble = {
             name,
             src: baubleImg,
-            amount: amount.toString(),
-            yearOfPurchase: yearOfPurchase.toString(),
+            amount,
+            yearOfPurchase,
             type,
             color,
             size,
@@ -65,8 +65,8 @@ const BaubleCard: React.FC<BaubleCardProps> = ({
             dispatch(addToFavorites(bauble));
         } else {
             dispatch(removeFromFavorites(bauble));
-        }
-        onFavoriteChange(name, newFavoriteStatus);    };
+        }    
+    };
     
     return (
         <CardContainer>

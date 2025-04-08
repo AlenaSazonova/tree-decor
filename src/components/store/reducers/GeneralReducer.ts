@@ -198,7 +198,10 @@ const baublesSlice = createSlice({
     reducers: {
         addToFavorites: (state, action: PayloadAction<Bauble>) => {
             const item = state.bauble.find(bauble => bauble.src === action.payload.src);
-            if (item && !state.favorites.includes(item)) {
+            const alreadyInFavorites = state.favorites.some(fav => fav.src === action.payload.src);
+
+
+            if (item && !alreadyInFavorites) {
                 state.favorites.push(item);
                 item.favorite = 'Любимая: да';
                 state.favoriteCount += 1
@@ -207,6 +210,7 @@ const baublesSlice = createSlice({
         removeFromFavorites: (state, action: PayloadAction<Bauble>) => {
             state.favorites = state.favorites.filter(el => el.src !== action.payload.src);
             const item = state.bauble.find(bauble => bauble.src === action.payload.src);
+
             if (item) {
                 item.favorite = 'Любимая: нет';
                 state.favoriteCount -= 1
