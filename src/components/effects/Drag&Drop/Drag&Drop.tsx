@@ -13,7 +13,7 @@ interface Point {
 
 const useDragAndDrop = (treeMask: Point[]) => {
     const [decorations, setDecorations] = useState<Decoration[]>([]);
-    const treeRef = useRef<HTMLDivElement | null>(null);
+    const treeRef = useRef<HTMLImageElement | null>(null);
 
     const handleDragStart = (e: React.DragEvent<HTMLImageElement>, src: string) => {
         e.dataTransfer.setData('src', src);

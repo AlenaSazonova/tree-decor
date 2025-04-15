@@ -1,4 +1,3 @@
-// @ts-ignore
 import React, { useRef, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import html2canvas from "html2canvas";
@@ -11,6 +10,7 @@ import audioMP3 from '../../audio/audio.mp3';
 import Snowfall from '../../effects/Snowfall/Snowfall';
 import GarlandOverlayWithLights from '../../effects/GarlandOverlayWithLights/GarlandOverlayWithLights';
 import useDragAndDrop from '../../effects/Drag&Drop/Drag&Drop';
+import { RootState } from '../../store/store';
 
 
 import {
@@ -64,22 +64,22 @@ import {
 }
     from './TreeDecorator.style';
 
-const TreeDecorator = () => {
+const TreeDecorator: React.FC = () => {
     const dispatch = useDispatch();
-    const savedTrees = useSelector(state => state.baubles.savedTrees);
-    const favorites = useSelector(state => state.baubles.favorites);
+    const savedTrees = useSelector((state: RootState) => state.baubles.savedTrees);
+    const favorites = useSelector((state: RootState) => state.baubles.favorites);
     const tree = initialState.tree;
     const background = initialState.background;
-    const audioRef = useRef(new Audio(audioMP3));
+    const audioRef = useRef<HTMLAudioElement>(new Audio(audioMP3));
     const colors = ['linear-gradient(90deg, yellow, orange, #e009de, #812fbd)', 'red', 'blue', 'yellow', '#03f403'];
 
-    const [showSnow, setShowSnow] = useState(false);
-    const [audioStatus, setAudioStatus] = useState(false);
-    const [selectedImage, setSelectedImage] = useState(background[0]);
-    const [selectedImageTree, setSelectedImageTree] = useState(tree[0]);
-    const [isOn, setIsOn] = useState(false);
-    const [garlandColor, setGarlandColor] = useState(null);
-    const containerRef = useRef(null);
+    const [showSnow, setShowSnow] = useState<boolean>(false);
+    const [audioStatus, setAudioStatus] = useState<boolean>(false);
+    const [selectedImage, setSelectedImage] = useState<{ src: string, alt: string }>(background[0]);
+    const [selectedImageTree, setSelectedImageTree] = useState<{ src: string, alt: string }>(tree[0]);
+    const [isOn, setIsOn] = useState<boolean>(false);
+    const [garlandColor, setGarlandColor] = useState<string>("red");
+    const containerRef = useRef<HTMLDivElement>(null);
 
     const handleSave = async () => {
         if (!containerRef.current) return;
@@ -88,21 +88,21 @@ const TreeDecorator = () => {
             const canvas = await html2canvas(containerRef.current, { backgroundColor: null });
             const image = canvas.toDataURL("image/png");
 
-            dispatch(saveTree(image));
+            dispatch(saveTree({ src: image, alt: 'Saving tree' }));
         } catch (error) {
             console.error("Ошибка при сохранении изображения:", error);
         }
     };
 
-    const handleThumbnailClick = (image) => {
+    const handleThumbnailClick = (image: { src: string; alt: string }) => {
         setSelectedImage(image);
     }
 
-    const handleThumbnailTreeClick = (imageTree) => {
+    const handleThumbnailTreeClick = (imageTree: { src: string; alt: string }) => {
         setSelectedImageTree(imageTree);
     }
 
-    const handleGarlandClick = (color) => {
+    const handleGarlandClick = (color: string) => {
         setGarlandColor(color);
     }
 
@@ -311,7 +311,7 @@ const TreeDecorator = () => {
                         <TitleForDecoratedTrees>Вы нарядили</TitleForDecoratedTrees>
                         <SavedTreesContainer>
                             {savedTrees.map((tree, index) => (
-                                <SavedTreeImage key={index} src={tree} alt="Decorated tree" />
+                                <SavedTreeImage key={index} src={tree.src} alt={tree.alt} />
                             ))}
                         </SavedTreesContainer>
                     </DecoratedTreesWrapper>

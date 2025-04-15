@@ -7,7 +7,7 @@ import {
 
 
 interface GarlandOverlayWithLightsProps {
-    color?: string;
+    color: string;
     isOn: boolean;
 }
 

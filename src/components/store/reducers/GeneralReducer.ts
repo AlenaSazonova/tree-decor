@@ -70,10 +70,12 @@ export interface Bauble {
 
 interface Tree {
     src: string;
+    alt: string;
 }
 
 interface Background {
     src: string;
+    alt: string;
 }
 
 interface ShapeFilter {
@@ -140,25 +142,25 @@ export const initialState: BaublesState = {
     savedTrees: [],
 
     tree: [
-        { src: tree1 },
-        { src: tree2 },
-        { src: tree3 },
-        { src: tree4 },
-        { src: tree5 },
-        { src: tree6 },
+        { src: tree1, alt: 'Ёлка 1' },
+        { src: tree2, alt: 'Ёлка 2' },
+        { src: tree3, alt: 'Ёлка 3' },
+        { src: tree4, alt: 'Ёлка 4' },
+        { src: tree5, alt: 'Ёлка 5' },
+        { src: tree6, alt: 'Ёлка 6' },
     ],
 
     background: [
-        { src: background1 },
-        { src: background2 },
-        { src: background3 },
-        { src: background4 },
-        { src: background5 },
-        { src: background6 },
-        { src: background7 },
-        { src: background8 },
-        { src: background9 },
-        { src: background10 },
+        { src: background1, alt: ' background 1' },
+        { src: background2, alt: ' background 2' },
+        { src: background3, alt: ' background 3' },
+        { src: background4, alt: ' background 4' },
+        { src: background5, alt: ' background 5' },
+        { src: background6, alt: ' background 6' },
+        { src: background7, alt: ' background 7' },
+        { src: background8, alt: ' background 8' },
+        { src: background9, alt: ' background 9' },
+        { src: background10, alt: ' background 10' },
     ],
 
 

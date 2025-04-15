@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface ButtonColorProps {
+    color?: string;
+}
+
 export const Container = styled.div`
     width: 100%;
 `;
@@ -117,7 +121,7 @@ export const GarlandButtonContainer = styled.div`
     gap: 20px;
 `;
 
-export const ButtonColor = styled.button`
+export const ButtonColor = styled.button<ButtonColorProps>`
     width: 30px;
     height: 30px;
     background: ${(props) => props.color || "gray"};
